@@ -1,0 +1,2176 @@
+``html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo | Chandina Medinova Hospital - Billing & Accounts System</title>
+<meta name="theme-color" content="#155e96">
+
+<!-- Browser Tab Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23155e96'/><path d='M35 50h30M50 35v30' stroke='white' stroke-width='14' stroke-linecap='round'/></svg>">
+
+<style id="pageStyle">
+@page{size:A5 portrait;margin:4mm 5mm}
+</style>
+
+<style>
+:root{
+  --blue:#155e96;--navy:#0e2942;--bg:#f0f4f9;--line:#d8e3ee;--muted:#5c6f84;
+  --green:#087f69;--red:#b91c1c;--orange:#d97706;--purple:#7c3aed;--card-shadow:0 6px 20px rgba(18,50,77,0.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:13px 'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;color:#182d40;transition:background 0.3s}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:7px;padding:7px 12px;background:var(--blue);color:white;font-weight:700;transition:all 0.2s cubic-bezier(0.4,0,0.2,1);display:inline-flex;align-items:center;gap:5px;justify-content:center}
+button:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,0.12)}
+button:active{transform:translateY(0)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.ghost{background:#e5edf5;color:#123b5a}
+.ghost:hover{background:#d5e2ef}
+.danger{background:var(--red)}
+.green{background:var(--green)}
+.orange{background:var(--orange)}
+.purple{background:var(--purple)}
+
+/* Portfolio Demo Ribbon */
+.demo-banner{background:linear-gradient(90deg,#0f172a,#1e3a8a,#0f172a);color:white;padding:7px 14px;font-size:11.5px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.demo-banner b{color:#38bdf8}
+
+.shell{max-width:1340px;margin:auto;padding:12px;animation:fadeIn 0.3s ease-in-out}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;background:white;padding:10px 16px;border-radius:10px;border:1px solid var(--line)}
+.top h1{font-size:18px;color:var(--navy);margin:0;display:flex;align-items:center;gap:8px}
+.top p{margin:2px 0;color:var(--muted);font-size:12px}
+
+/* Enhanced Tab Navigation Bar */
+.tabs{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: var(--card-shadow);
+}
+.tabs button{
+  position: relative;
+  overflow: hidden;
+  padding: 8px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+.tabs button::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  transition: 0.5s ease;
+  pointer-events: none;
+}
+.tabs button:hover::before{left: 150%;}
+.tabs button:hover{transform: translateY(-3px) scale(1.03);filter: brightness(1.04);}
+.tabs button:active{transform: translateY(-1px) scale(0.99);}
+.tabs button.active{
+  transform: translateY(-2px);
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.6) !important;
+  animation: tabGlow 2.2s infinite ease-in-out alternate;
+}
+@keyframes tabGlow{
+  0%{ filter: brightness(1); }
+  100%{ filter: brightness(1.12); transform: translateY(-2.8px); }
+}
+
+.tabs button[data-tab="dashboard"]{background:#eef2ff;color:#4338ca;border-color:#c7d2fe;}
+.tabs button[data-tab="dashboard"]:hover,.tabs button[data-tab="dashboard"].active{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;border-color:#3730a3;box-shadow:0 6px 16px rgba(99,102,241,0.4);}
+
+.tabs button[data-tab="registration"]{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
+.tabs button[data-tab="registration"]:hover,.tabs button[data-tab="registration"].active{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border-color:#166534;box-shadow:0 6px 16px rgba(34,197,94,0.4);}
+
+.tabs button[data-tab="billing"]{background:#f0f9ff;color:#0369a1;border-color:#bae6fd;}
+.tabs button[data-tab="billing"]:hover,.tabs button[data-tab="billing"].active{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;border-color:#075985;box-shadow:0 6px 16px rgba(2,132,199,0.4);}
+
+.tabs button[data-tab="indoor"]{background:#faf5ff;color:#7e22ce;border-color:#e9d5ff;}
+.tabs button[data-tab="indoor"]:hover,.tabs button[data-tab="indoor"].active{background:linear-gradient(135deg,#a855f7,#7e22ce);color:#fff;border-color:#6b21a8;box-shadow:0 6px 16px rgba(168,85,247,0.4);}
+
+.tabs button[data-tab="history"]{background:#f1f5f9;color:#334155;border-color:#cbd5e1;}
+.tabs button[data-tab="history"]:hover,.tabs button[data-tab="history"].active{background:linear-gradient(135deg,#64748b,#1e293b);color:#fff;border-color:#0f172a;box-shadow:0 6px 16px rgba(71,85,105,0.4);}
+
+.tabs button[data-tab="dues"]{background:#fffbeb;color:#b45309;border-color:#fde68a;}
+.tabs button[data-tab="dues"]:hover,.tabs button[data-tab="dues"].active{background:linear-gradient(135deg,#f59e0b,#b45309);color:#fff;border-color:#92400e;box-shadow:0 6px 16px rgba(245,158,11,0.4);}
+
+.tabs button[data-tab="expenses"]{background:#fff1f2;color:#be123c;border-color:#fecdd3;}
+.tabs button[data-tab="expenses"]:hover,.tabs button[data-tab="expenses"].active{background:linear-gradient(135deg,#f43f5e,#be123c);color:#fff;border-color:#9f1239;box-shadow:0 6px 16px rgba(244,63,94,0.4);}
+
+.tabs button[data-tab="doctors"]{background:#f0fdfa;color:#0f766e;border-color:#99f6e4;}
+.tabs button[data-tab="doctors"]:hover,.tabs button[data-tab="doctors"].active{background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;border-color:#115e59;box-shadow:0 6px 16px rgba(20,184,166,0.4);}
+
+.tabs button[data-tab="catalog"]{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
+.tabs button[data-tab="catalog"]:hover,.tabs button[data-tab="catalog"].active{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border-color:#1e40af;box-shadow:0 6px 16px rgba(59,130,246,0.4);}
+
+.tabs button[data-tab="profit"]{background:#ecfdf5;color:#047857;border-color:#a7f3d0;}
+.tabs button[data-tab="profit"]:hover,.tabs button[data-tab="profit"].active{background:linear-gradient(135deg,#10b981,#047857);color:#fff;border-color:#065f46;box-shadow:0 6px 16px rgba(16,185,129,0.4);}
+
+.tabs button[data-tab="settings"]{background:#fafaf9;color:#44403c;border-color:#d6d3d1;}
+.tabs button[data-tab="settings"]:hover,.tabs button[data-tab="settings"].active{background:linear-gradient(135deg,#78716c,#44403c);color:#fff;border-color:#292524;box-shadow:0 6px 16px rgba(120,113,108,0.4);}
+
+.tabs button[data-tab="about"]{background:#fdf2f8;color:#be185d;border-color:#fbcfe8;}
+.tabs button[data-tab="about"]:hover,.tabs button[data-tab="about"].active{background:linear-gradient(135deg,#ec4899,#be185d);color:#fff;border-color:#9d174d;box-shadow:0 6px 16px rgba(236,72,153,0.4);}
+
+.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:var(--card-shadow);animation:slideUp 0.25s ease-out}
+.panel h2{font-size:14.5px;color:var(--navy);margin:0 0 12px;display:flex;justify-content:space-between;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.field label{display:block;font-size:11.5px;font-weight:700;margin-bottom:4px;color:#334e68}
+.field input,.field select,.field textarea{width:100%;border:1px solid #c9d7e6;border-radius:6px;padding:6px 8px;background:white;color:#1b3348;min-height:34px;transition:border 0.2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(21,94,150,0.15)}
+.field textarea{min-height:55px;resize:vertical}
+.wide{grid-column:span 2}
+.full{grid-column:1/-1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left}
+th{background:#edf4fa;font-size:12px;color:#234460;font-weight:700}
+td input,td select{width:100%;border:1px solid #d4e0ec;border-radius:4px;padding:5px 6px}
+td .narrow{min-width:60px}
+.right{text-align:right}
+.hint{color:var(--muted);font-size:11.5px;margin-top:6px}
+
+/* Stats Cards */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.stat{position:relative;overflow:hidden;min-height:86px;padding:10px 13px;background:white;border:1px solid var(--line);border-radius:10px;box-shadow:var(--card-shadow);transition:transform 0.2s}
+.stat:hover{transform:translateY(-2px)}
+.stat:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#2785d5}
+.stat>span{display:block;color:#5c758d;font-size:11px;font-weight:700}
+.stat b{display:block;font-size:19px;color:var(--navy);margin-top:5px}
+.stat small{display:block;color:#8596a7;margin-top:2px;font-size:10px}
+.accent-blue:before{background:#2785d5}
+.accent-cyan:before{background:#0ea5e9}
+.accent-green:before{background:#1ca568}
+.accent-orange:before{background:#f28b37}
+.accent-purple:before{background:#8b5cf6}
+.accent-teal:before{background:#14b8a6}
+.accent-red:before{background:#ef4444}
+
+.split{display:grid;grid-template-columns:1.3fr 1fr;gap:12px}
+.summary{background:#f3f7fc;border:1px solid #d4e1ee;border-radius:8px;padding:12px}
+.sumline{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dbe6f0;font-size:12px}
+.sumline:last-child{border:0}
+.sumline.big{font-size:14px;font-weight:800;color:#0e3c63}
+.sumline.commission{color:#b91c1c;font-weight:700}
+.sumline.refund{color:#d97706;font-weight:700}
+.sumline.net-profit{color:#087f69;font-weight:800;font-size:13px}
+
+.hidden{display:none!important}
+.searchbar{display:flex;gap:8px;margin-bottom:10px}
+.searchbar input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:6px}
+.mini{padding:3px 7px;font-size:11px;border-radius:5px}
+.badge{padding:3px 7px;background:#e1f5ee;border-radius:8px;color:#076350;font-size:11px;font-weight:700}
+.inline{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.inline .field{flex:1;min-width:130px}
+
+/* Enhanced Colorful Dashboard Navigation Cards */
+.nav-hub{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
+.nav-tile{
+  border-radius:10px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:6px;cursor:pointer;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+  border:1px solid transparent;box-shadow:0 3px 10px rgba(0,0,0,0.04);
+}
+.nav-tile:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,0.1);}
+.nav-tile span.icon{font-size:22px;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.85);box-shadow:0 2px 6px rgba(0,0,0,0.06);}
+.nav-tile span.text{font-size:11.5px;font-weight:700;}
+
+.tile-blue{background:linear-gradient(145deg,#eff6ff,#dbeafe);border-color:#bfdbfe}
+.tile-blue span.text{color:#1e40af}
+.tile-green{background:linear-gradient(145deg,#ecfdf5,#d1fae5);border-color:#a7f3d0}
+.tile-green span.text{color:#065f46}
+.tile-purple{background:linear-gradient(145deg,#faf5ff,#f3e8ff);border-color:#e9d5ff}
+.tile-purple span.text{color:#6b21a8}
+.tile-amber{background:linear-gradient(145deg,#fffbeb,#fef3c7);border-color:#fde68a}
+.tile-amber span.text{color:#92400e}
+.tile-rose{background:linear-gradient(145deg,#fff1f2,#ffe4e6);border-color:#fecdd3}
+.tile-rose span.text{color:#9f1239}
+.tile-sky{background:linear-gradient(145deg,#f0f9ff,#e0f2fe);border-color:#bae6fd}
+.tile-sky span.text{color:#0369a1}
+
+.dash-panels{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.collection-row{display:flex;justify-content:space-between;padding:6px 2px;border-bottom:1px solid #edf2f7;color:#456077;font-size:11.5px}
+.collection-row.total{font-weight:800;color:#104068;border:0;font-size:12.5px}
+
+/* Growth Curve Chart */
+.chart-box{background:white;border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:var(--card-shadow)}
+.chart-svg{width:100%;height:160px;overflow:visible}
+
+/* Toast Notification */
+#toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:9px 16px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.2);display:none;z-index:999999;font-weight:bold;animation:fadeIn 0.2s}
+
+/* --- ISOLATED DYNAMIC PRINT STYLING --- */
+#printContainer{display:none}
+@media print{
+  html,body{background:white!important;margin:0!important;padding:0!important}
+  .shell,.no-print,.auth-screen,#toast,.demo-banner{display:none!important}
+  #printContainer{display:block!important;width:100%!important;margin:0!important;padding:0!important}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+
+/* Patient Receipt Layout */
+.receipt{width:100%;max-width:142mm;margin:0 auto;background:white;padding:4mm 5mm;border:0}
+.receipt.paper-a6{max-width:100mm;padding:2mm 3mm;font-size:11px}
+.receipt.paper-a6 .rhead h2{font-size:13px}
+.receipt.paper-a6 th,.receipt.paper-a6 td{padding:2px 1.5px!important;font-size:8.5px!important}
+.receipt.paper-a6 .rfoot{margin-top:24px!important}
+
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--blue);padding-bottom:4px;gap:8px;width:100%}
+.hospital-brand{display:flex;align-items:center;gap:7px}
+.hospital-logo{max-width:44px;max-height:44px;object-fit:contain}
+.rhead h2{margin:0;color:#124b78;font-size:15px;letter-spacing:-0.2px}
+.rhead p{margin:1.5px 0;font-size:9.5px;color:#334155}
+.receipt-heading{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end}
+.receipt-heading b.title{font-size:12.5px;color:var(--blue);display:block}
+.receipt-heading p{margin:1px 0;font-size:9px}
+.barcode-wrap{margin-top:2px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.barcode-wrap svg{display:block;width:38mm;height:9.5mm;background:white}
+.rmeta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5px 10px;margin:4px 0;font-size:9.5px}
+.rmeta div{border-bottom:1px dotted #cbd5e1;padding:1.5px 0;color:#1e293b}
+.receipt table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse}
+.receipt th,.receipt td{padding:3px 2px;font-size:9.5px;overflow-wrap:anywhere;line-height:1.15;border-bottom:1px solid #e2e8f0}
+.receipt th{background:#edf4fa;font-weight:700}
+.receipt th:nth-child(1){width:7%}
+.receipt th:nth-child(2){width:45%}
+.receipt th:nth-child(3){width:16%}
+.receipt th:nth-child(4){width:14%}
+.receipt th:nth-child(5){width:6%}
+.receipt th:nth-child(6){width:12%}
+.rfoot{display:flex;justify-content:space-between;margin-top:36px;font-size:9px;gap:12px;page-break-inside:avoid}
+.rfoot span{flex:1;border-top:1px dashed #64748b;padding-top:4px;text-align:center;color:#1e293b;font-weight:700}
+
+/* Expense Slip */
+.expense-slip{width:100%;max-width:140mm;margin:0 auto;background:white;padding:8mm 8mm}
+.exp-head{display:flex;justify-content:space-between;border-bottom:2px solid #0e2942;padding-bottom:6px}
+.exp-head h2{margin:0;color:#0e2942;font-size:16px}
+.exp-table{width:100%;margin:14px 0;font-size:11px;border-collapse:collapse}
+.exp-table td{padding:6px 4px;border-bottom:1px dotted #cbd5e1}
+.exp-foot{display:flex;justify-content:space-between;margin-top:55px;font-size:10px}
+.exp-foot span{border-top:1px dashed #475569;padding-top:4px;min-width:110px;text-align:center}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.auth-screen{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#eef3f9;padding:16px}
+.auth-card{width:min(400px,100%);background:#fff;border:1px solid #d7e2ee;border-radius:12px;padding:24px;box-shadow:0 8px 30px rgba(18,50,77,0.14)}
+body.unlocked .auth-screen{display:none!important}
+body:not(.unlocked) .shell,body:not(.unlocked) #printContainer{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- Portfolio Demo Ribbon -->
+<div class="demo-banner no-print">
+  <div>
+    <span>🚀 <b>Portfolio Live Demo</b> | Hospital Billing, Admission & Financial ERP</span>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button class="mini green" onclick="resetToSampleData()" title="Reload fresh demo records">🔄 Reset Demo Data</button>
+  </div>
+</div>
+
+<!-- Login / Unlock Screen with 1-Click Demo Access -->
+<div id="authGate" class="auth-screen">
+  <div class="auth-card">
+    <div style="text-align:center;margin-bottom:10px"><span style="font-size:36px">🏥</span></div>
+    <h1 id="authTitle" style="font-size:18px;color:#12324d;margin:0 0 6px;text-align:center">Medinova Accounts Pro</h1>
+    <p id="authHint" style="color:#64748b;font-size:12px;text-align:center;margin:0 0 14px">Hospital Management & Financial Accounting System</p>
+    
+    <div style="background:#f0f9ff;border:1px dashed #38bdf8;padding:10px;border-radius:8px;margin-bottom:14px;text-align:center">
+      <span style="font-size:11.5px;color:#0369a1;display:block"><b>👋 Portfolio Visitor?</b> Default PIN: <b style="color:#0284c7">1234</b></span>
+      <button type="button" class="mini green" onclick="demoQuickLogin()" style="margin-top:6px;width:100%">⚡ 1-Click Instant Demo Login</button>
+    </div>
+
+    <form id="authForm">
+      <div class="field" style="margin:12px 0">
+        <label for="authPassword">Enter Password</label>
+        <input id="authPassword" type="password" required autocomplete="current-password" placeholder="1234">
+      </div>
+      <div class="field" id="authConfirmWrap" hidden style="margin:12px 0">
+        <label for="authConfirm">Confirm Password</label>
+        <input id="authConfirm" type="password" autocomplete="new-password">
+      </div>
+      <button class="ghost" id="authSubmit" type="submit" style="width:100%;margin-top:8px">Unlock Application</button>
+      <p id="authMessage" class="hint" style="color:red;text-align:center" role="alert"></p>
+    </form>
+  </div>
+</div>
+
+<div class="shell no-print">
+  <!-- Top Bar -->
+  <div class="top">
+    <div style="display:flex;align-items:center;gap:12px">
+      <img id="topBrandLogo" style="display:none;width:40px;height:40px;object-fit:contain;border-radius:6px" alt="Logo">
+      <div>
+        <h1 id="brandNameDisplay">CHANDINA MEDINOVA HOSPITAL <span style="font-size:11px;background:#e0f2fe;color:#0369a1;padding:2px 7px;border-radius:6px;font-weight:600">Portfolio Demo v2.9</span></h1>
+        <p>Patient Barcode System, A5/A6 Slip Printing, Refund Engine & Comprehensive Accounts</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div style="position:relative">
+        <input id="quickGlobalSearch" oninput="handleGlobalSearch(this.value)" placeholder="🔍 Search Receipt, Mobile, Name..." style="border:1px solid #cbd5e1;border-radius:6px;padding:6px 10px;font-size:11.5px;width:220px">
+      </div>
+      <span class="badge" id="appModeBadge">● Live Demo Mode</span>
+      <button class="ghost mini" type="button" onclick="lockApp()">🔒 Lock</button>
+    </div>
+  </div>
+
+  <!-- Complete Vibrant & Animated Tab Navigation Bar -->
+  <div class="tabs">
+    <button data-tab="dashboard" class="active" onclick="showTab('dashboard')">📊 Dashboard</button>
+    <button data-tab="registration" onclick="showTab('registration')">👤 Patient Registration</button>
+    <button data-tab="billing" onclick="showTab('billing');toggleBillType('investigation')">🔬 Investigation Bill</button>
+    <button data-tab="indoor" onclick="newIndoorBill()">🏥 Surgery / Indoor Bill</button>
+    <button data-tab="history" onclick="showTab('history')">📑 All Invoice History</button>
+    <button data-tab="dues" onclick="openDueList()">⚠️ Due Bills</button>
+    <button data-tab="expenses" onclick="showTab('expenses')">💸 Expense Vouchers</button>
+    <button data-tab="doctors" onclick="showTab('doctors')">👨‍⚕️ Doctors Directory</button>
+    <button data-tab="catalog" onclick="showTab('catalog')">📋 Test Rate Catalog</button>
+    <button data-tab="profit" onclick="showTab('profit')">📈 Profit & Loss</button>
+    <button data-tab="settings" onclick="showTab('settings')">⚙️ Settings & Backup</button>
+    <button data-tab="about" onclick="showTab('about')">ℹ️ About</button>
+  </div>
+
+  <!-- 1. DASHBOARD SECTION -->
+  <section id="dashboard" class="tab">
+    <div class="nav-hub">
+      <div class="nav-tile tile-blue" onclick="showTab('registration');newPatient()">
+        <span class="icon">👤</span>
+        <span class="text">New Patient</span>
+      </div>
+      <div class="nav-tile tile-green" onclick="showTab('billing');newReceipt()">
+        <span class="icon">🔬</span>
+        <span class="text">Diagnostic Bill</span>
+      </div>
+      <div class="nav-tile tile-purple" onclick="newIndoorBill()">
+        <span class="icon">🏥</span>
+        <span class="text">Indoor & Surgery Admission</span>
+      </div>
+      <div class="nav-tile tile-amber" onclick="openDueList()">
+        <span class="icon">⚠️</span>
+        <span class="text">Due Collection</span>
+      </div>
+      <div class="nav-tile tile-rose" onclick="showTab('expenses');$('eAmount').focus()">
+        <span class="icon">💸</span>
+        <span class="text">Record Expense</span>
+      </div>
+      <div class="nav-tile tile-sky" onclick="showTab('history')">
+        <span class="icon">📑</span>
+        <span class="text">Search Invoices</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat accent-blue"><span>Registered Patients</span><b id="sPatients">0</b><small>Total Patients</small></div>
+      <div class="stat accent-cyan"><span>Total Invoices</span><b id="sReceipts">0</b><small>Invoices Issued</small></div>
+      <div class="stat accent-green"><span>Net Billed Amount</span><b id="sNet">৳ 0.00</b><small>Net After Discount</small></div>
+      <div class="stat accent-orange"><span>Outstanding Due</span><b id="sDue">৳ 0.00</b><small>Total Uncollected</small></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat accent-purple"><span>Today’s Collection</span><b id="sToday">৳ 0.00</b><small>Net Cash Received Today</small></div>
+      <div class="stat accent-red"><span>Today’s Commission</span><b id="sTodayCommission">৳ 0.00</b><small>Referral Commission Paid</small></div>
+      <div class="stat accent-teal"><span>Today’s Expenses</span><b id="sTodayExpense">৳ 0.00</b><small>Hospital Daily Expenses</small></div>
+      <div class="stat accent-green"><span>Hospital Net Earning</span><b id="sTodayHospitalNet">৳ 0.00</b><small>Net Retained Cash</small></div>
+    </div>
+
+    <!-- Growth Curve Trend Chart -->
+    <div class="chart-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h2 style="margin:0;font-size:14px;color:var(--navy)">📈 Financial Growth Curve / 7-Day Net Revenue Trend</h2>
+        <span style="font-size:11px;color:#64748b">Daily Net Revenue Progression (৳)</span>
+      </div>
+      <svg id="growthChart" class="chart-svg" viewBox="0 0 650 160"></svg>
+    </div>
+
+    <div class="dash-panels">
+      <div class="panel">
+        <h2>Today’s Collection Breakdown</h2>
+        <div id="collectionSplit" class="collection-list"></div>
+      </div>
+      <div class="panel">
+        <h2>Department / Room Overview</h2>
+        <div class="table-wrap">
+          <table class="compact">
+            <thead><tr><th>Room / Department</th><th>Patients</th><th>Today’s Bills</th><th>Status</th></tr></thead>
+            <tbody id="departmentBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. REGISTRATION SECTION -->
+  <section id="registration" class="tab hidden">
+    <div class="panel">
+      <h2>Patient Registration</h2>
+      <div class="grid">
+        <div class="field"><label>Patient ID ✏️ (Editable)</label><input id="pId" autocomplete="off" style="font-weight:bold;color:#0e3c63" placeholder="88415"></div>
+        <div class="field"><label>Registration Date</label><input type="date" id="pDate"></div>
+        <div class="field wide"><label>Patient Name</label><input id="pName" placeholder="Enter full patient name"></div>
+        <div class="field"><label>Age</label><input id="pAge" placeholder="e.g. 28Y / 6M"></div>
+        <div class="field"><label>Gender</label><select id="pSex"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+        <div class="field"><label>Mobile Number</label><input id="pMobile" placeholder="01XXXXXXXXX"></div>
+        
+        <div class="field"><label>Room / Ward Selection</label>
+          <select id="pWard">
+            <option value="Ward / Bed">Ward / Bed</option>
+            <option value="Pathology (Room-5)">Pathology (Room-5)</option>
+            <option value="X-ray (Room-7)">X-ray (Room-7)</option>
+            <option value="Ultra (Room-6)">Ultra (Room-6)</option>
+            <option value="ECG (Room-6)">ECG (Room-6)</option>
+            <option value="Nebulization (Room-10)">Nebulization (Room-10)</option>
+            <option value="Suction (Room-12)">Suction (Room-12)</option>
+            <option value="Cabin-201">Cabin-201</option>
+            <option value="Cabin-202">Cabin-202</option>
+            <option value="Cabin-203">Cabin-203</option>
+            <option value="Cabin-204">Cabin-204</option>
+            <option value="Cabin-205">Cabin-205</option>
+            <option value="Cabin-206">Cabin-206</option>
+            <option value="Cabin-207">Cabin-207</option>
+            <option value="Cabin-208">Cabin-208</option>
+            <option value="Cabin-209">Cabin-209</option>
+            <option value="Cabin-210">Cabin-210</option>
+            <option value="Cabin-211">Cabin-211</option>
+            <option value="Cabin-213">Cabin-213</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field wide"><label>Address</label><input id="pAddress" placeholder="Patient address / village / city"></div>
+        
+        <div class="field wide">
+          <label>Referred Doctor (Select dropdown or type 2 letters)</label>
+          <div style="display:flex;gap:6px">
+            <select id="pDoctorSelect" onchange="syncDoctorInput('p')" style="max-width:180px"></select>
+            <input id="pDoctor" list="pDoctorDatalist" placeholder="Type 2 letters to search or enter doctor..." autocomplete="off" style="flex:1">
+            <datalist id="pDoctorDatalist"></datalist>
+            <button type="button" class="mini ghost" onclick="saveCustomDoctor('p')">＋ Save</button>
+          </div>
+        </div>
+        <div class="field"><label>Registration Fee (৳)</label><input id="pFee" type="number" min="0" value="0"></div>
+      </div>
+      <div class="actions">
+        <button onclick="savePatient()">Save Patient</button>
+        <button class="ghost" onclick="newPatient()">New / Clear</button>
+        <button class="green" onclick="savePatient(true)">Save & Start Investigation Bill</button>
+        <button class="purple" onclick="savePatient(false, true)">Save & Start Surgery Bill</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Registered Patients Directory</h2>
+      <div class="searchbar"><input id="patientSearch" oninput="renderPatients()" placeholder="Search patient by name, ID or mobile..."></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Patient ID</th><th>Name</th><th>Mobile</th><th>Room/Ward</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="patientsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. BILLING SECTION -->
+  <section id="billing" class="tab hidden">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <h2 id="billingMainTitle" style="margin:0">Investigation & Diagnostic Bill</h2>
+        <div style="display:flex;gap:6px">
+          <button type="button" class="mini ghost" onclick="toggleBillType('investigation')">🔬 Diagnostic Mode</button>
+          <button type="button" class="mini purple" onclick="toggleBillType('indoor')">🏥 Surgery / Indoor Mode</button>
+        </div>
+      </div>
+      
+      <div class="grid">
+        <div class="field">
+          <label>Receipt No. ✏️ (Editable)</label>
+          <input id="bNo" style="font-weight:bold;color:#b91c1c" placeholder="1">
+        </div>
+        <div class="field"><label>Bill Type</label><select id="bType" onchange="updateBillMode()"><option value="investigation">Investigation / Diagnostic</option><option value="indoor">Indoor & Surgery Admission</option></select></div>
+        <div class="field"><label>Billing Date</label><input id="bDate" type="date"></div>
+        <div class="field" id="indoorCategoryWrap">
+          <label>Surgery / Case Type</label>
+          <select id="bCategory">
+            <option value="C-Section">C-Section</option>
+            <option value="Appendicitis">Appendicitis</option>
+            <option value="Hernia">Hernia</option>
+            <option value="Normal Delivery">Normal Delivery</option>
+            <option value="General Indoor Care">General Indoor Care</option>
+            <option value="Other Surgery">Other Surgery</option>
+          </select>
+        </div>
+        <div class="field wide">
+          <label>Choose Registered Patient *</label>
+          <div class="inline"><select id="bPatient" onchange="syncPatient()"></select><button type="button" class="mini ghost" onclick="editSelectedPatientName()">Edit</button></div>
+        </div>
+
+        <div class="field wide">
+          <label>Room / Ward Selection</label>
+          <div style="display:flex;gap:6px">
+            <select id="bWardSelect" onchange="addWardOption(this.value);this.value='';" style="max-width:200px">
+              <option value="">＋ Add Room/Ward</option>
+              <option value="Pathology (Room-5)">Pathology (Room-5)</option>
+              <option value="Ultra (Room-6)">Ultra (Room-6)</option>
+              <option value="ECG (Room-6)">ECG (Room-6)</option>
+              <option value="X-ray (Room-7)">X-ray (Room-7)</option>
+              <option value="Nebulization (Room-10)">Nebulization (Room-10)</option>
+              <option value="Suction (Room-12)">Suction (Room-12)</option>
+              <option value="Ward / Bed">Ward / Bed</option>
+              <option value="Cabin-201">Cabin-201</option>
+              <option value="Cabin-202">Cabin-202</option>
+              <option value="Cabin-203">Cabin-203</option>
+              <option value="Cabin-204">Cabin-204</option>
+              <option value="Cabin-205">Cabin-205</option>
+              <option value="Cabin-206">Cabin-206</option>
+              <option value="Cabin-207">Cabin-207</option>
+              <option value="Cabin-208">Cabin-208</option>
+              <option value="Cabin-209">Cabin-209</option>
+              <option value="Cabin-210">Cabin-210</option>
+              <option value="Cabin-211">Cabin-211</option>
+              <option value="Cabin-213">Cabin-213</option>
+              <option value="Other">Other</option>
+            </select>
+            <input id="bWard" placeholder="Select multiple rooms or type..." style="flex:1">
+            <button type="button" class="mini ghost" onclick="syncRoomsFromTests()" title="Auto detect from tests table">⚡ Auto</button>
+          </div>
+        </div>
+        
+        <div class="field wide">
+          <label>Referred Doctor (Select dropdown or type 2 letters)</label>
+          <div style="display:flex;gap:6px">
+            <select id="bDoctorSelect" onchange="syncDoctorInput('b')" style="max-width:180px"></select>
+            <input id="bDoctor" list="bDoctorDatalist" placeholder="Type 2 letters to search or enter doctor..." autocomplete="off" style="flex:1">
+            <datalist id="bDoctorDatalist"></datalist>
+            <button type="button" class="mini ghost" onclick="saveCustomDoctor('b')">＋ Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test or Indoor Item Table -->
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Service & Investigation Particulars</h2>
+        <div id="indoorPresets" style="display:none;gap:6px">
+          <button type="button" class="mini purple" onclick="loadSurgeryItems()">⚡ Load Surgery Package Items (C-Section/Normal Delivery/Hernia/Appendicitis)</button>
+        </div>
+      </div>
+
+      <div class="inline" id="diagSearchBox">
+        <div class="field"><label>Select Test from Catalog</label><input id="testSearch" list="testOptions" placeholder="Type test name..." oninput="suggestTests()"><datalist id="testOptions"></datalist></div>
+        <button onclick="addCatalogTest()">+ Add Test</button>
+        <button class="ghost" onclick="addTestRow()">+ Custom Row</button>
+      </div>
+
+      <div class="table-wrap" style="margin-top:10px">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:35px">#</th>
+              <th>Investigation / Service Particulars</th>
+              <th style="width:170px">Department / Room</th>
+              <th style="width:110px" class="right">Rate ৳</th>
+              <th style="width:70px" class="right">Qty/Days</th>
+              <th style="width:120px" class="right">Amount ৳</th>
+              <th style="width:40px">Action</th>
+            </tr>
+          </thead>
+          <tbody id="testsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Payments, Commission & Refund Split -->
+    <div class="split">
+      <div class="panel">
+        <h2>Payment, Refund & Commission Transaction</h2>
+        <div class="grid two">
+          <div class="field"><label>Discount (৳)</label><input id="bDiscount" type="number" min="0" value="0" oninput="calc()"></div>
+          
+          <div class="field" style="background:#fff1f2;padding:6px;border-radius:6px;border:1px dashed #fda4af">
+            <label style="color:#b91c1c">🤝 Referral Commission (৳)</label>
+            <input id="bCommission" type="number" min="0" value="0" oninput="calc()" placeholder="e.g. 300" style="font-weight:bold;color:#b91c1c">
+          </div>
+
+          <div class="field"><label>Other Charges (৳)</label><input id="bOther" type="number" min="0" value="0" oninput="calc()"></div>
+          
+          <div class="field"><label>Transaction Action</label>
+            <select id="bTxType" onchange="adjustTxTypeUI()">
+              <option value="Payment">Payment / Cash Received</option>
+              <option value="Refund">Refund to Patient</option>
+            </select>
+          </div>
+
+          <div class="field" style="background:#e0f2fe;padding:6px;border-radius:6px;border:1px dashed #0284c7">
+            <label style="color:#0369a1">💳 Payment Mode Selection *</label>
+            <select id="bPayMode" onchange="applyPaymentMode()" style="font-weight:bold;color:#0369a1">
+              <option value="Due">Due (৳ 0)</option>
+              <option value="Paid">Paid in Full</option>
+              <option value="Partial">Partial Payment</option>
+            </select>
+          </div>
+
+          <div class="field"><label id="bPayLabel">Amount (৳)</label><input id="bPay" type="number" min="0" value="0"></div>
+          <div class="field"><label>Payment Method</label><select id="bMethod"><option>Cash</option><option>bKash</option><option>Nagad</option><option>Card</option><option>Bank</option></select></div>
+          <div class="field full"><label>Special Instructions / Notes</label><textarea id="bNotes" placeholder="Delivery time, test instructions or surgery notes..."></textarea></div>
+        </div>
+        <div class="actions">
+          <button class="green" id="btnRecordTx" onclick="addTransaction()">Record Payment</button>
+        </div>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Time</th><th>Type</th><th>Method</th><th>Amount</th><th>Action</th></tr></thead>
+            <tbody id="txBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Accounts & Billing Summary</h2>
+        <div class="summary">
+          <div class="sumline"><span>Subtotal Amount</span><b id="vSubtotal">৳ 0.00</b></div>
+          <div class="sumline"><span>Discount (-)</span><b id="vDiscount">৳ 0.00</b></div>
+          <div class="sumline"><span>Other Charges (+)</span><b id="vOther">৳ 0.00</b></div>
+          <div class="sumline big"><span>Patient Net Payable</span><b id="vNet">৳ 0.00</b></div>
+          <div class="sumline"><span>Gross Paid Amount</span><b id="vPaid">৳ 0.00</b></div>
+          <div class="sumline refund"><span>Total Refund (-)</span><b id="vRefund">৳ 0.00</b></div>
+          <div class="sumline big" style="color:var(--red)"><span>Outstanding Due</span><b id="vDue">৳ 0.00</b></div>
+          <div class="sumline commission"><span>Referral Commission (-)</span><b id="vCommission">৳ 0.00</b></div>
+          <div class="sumline net-profit"><span>Hospital Net Earning</span><b id="vHospitalNet">৳ 0.00</b></div>
+          <div class="sumline"><span>Payment Status</span><b id="vStatus">Due</b></div>
+        </div>
+
+        <div class="field" style="margin-top:10px">
+          <label>🖨️ Receipt Print Paper Size</label>
+          <select id="receiptPaperSize" onchange="changePaperSize(this.value)">
+            <option value="A5">A5 Portrait (Half of A4 - 148 x 210 mm)</option>
+            <option value="A6">A6 Portrait (Pocket Size - 105 x 148 mm)</option>
+          </select>
+        </div>
+
+        <div class="actions" style="margin-top:12px">
+          <button onclick="saveReceipt()">Save Receipt</button>
+          <button class="green" onclick="printReceipt()">🖨️ Save & Print</button>
+          <button class="ghost" onclick="newReceipt()">New Bill</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HISTORY SECTION WITH MULTI-FIELD SEARCH -->
+  <section id="history" class="tab hidden">
+    <div class="panel">
+      <h2>Invoice History (All Receipts)</h2>
+      <div class="searchbar">
+        <input id="receiptSearch" oninput="renderReceipts()" placeholder="🔍 Search by Receipt No, Patient ID, Name, Mobile or Doctor...">
+        <button class="ghost mini" onclick="$('receiptSearch').value='Due';renderReceipts()">Show Only Dues</button>
+        <button class="ghost mini" onclick="$('receiptSearch').value='';renderReceipts()">Clear</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Receipt No.</th><th>Type</th><th>Date</th><th>Patient</th><th>Doctor</th><th>Net Billed</th><th>Commission</th><th>Refund</th><th>Due</th><th>Action</th></tr></thead>
+          <tbody id="receiptsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. EXPENSES SECTION -->
+  <section id="expenses" class="tab hidden">
+    <div class="panel">
+      <h2>Hospital Expense Voucher Entry</h2>
+      <div class="grid">
+        <div class="field"><label>Date</label><input type="date" id="eDate"></div>
+        <div class="field"><label>Category</label><select id="eCategory"><option>Medicine & Supplies</option><option>Staff Salary & Honorarium</option><option>Utilities & Electricity</option><option>Doctor/Agent Commission</option><option>Maintenance & OT</option><option>Food & Patient Diet</option><option>Other</option></select></div>
+        <div class="field"><label>Amount (৳) *</label><input type="number" id="eAmount" min="1"></div>
+        <div class="field"><label>Paid To / Vendor</label><input id="eVendor" placeholder="Recipient name / company"></div>
+        <div class="field full"><label>Description / Purpose *</label><input id="eDescription" placeholder="e.g. Emergency medicines, medical oxygen, generator fuel"></div>
+      </div>
+      <div class="actions">
+        <button onclick="saveExpense()">Save Expense Voucher</button>
+        <button class="ghost" onclick="clearExpenseForm()">Clear</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Expense History & Vouchers</h2>
+      <div class="searchbar">
+        <input id="expenseSearch" oninput="renderExpenses()" placeholder="🔍 Search by voucher ID, description, category, vendor or amount...">
+        <button class="ghost mini" onclick="$('expenseSearch').value='';renderExpenses()">Clear</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Voucher ID</th><th>Date</th><th>Category</th><th>Description</th><th>Paid To</th><th>Amount</th><th>Action</th></tr></thead>
+          <tbody id="expensesBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DOCTORS MANAGEMENT TAB -->
+  <section id="doctors" class="tab hidden">
+    <div class="panel">
+      <h2>Doctor Management & Directory</h2>
+      <div class="inline">
+        <div class="field" style="flex:2"><label>Doctor / Consultant Name & Qualifications</label><input id="newDocName" placeholder="Dr. Full Name, MBBS, FCPS / Speciality"></div>
+        <button type="button" onclick="addDoctor()">＋ Add New Doctor</button>
+      </div>
+      <div class="table-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th style="width:50px">#</th><th>Doctor Name & Qualifications</th><th style="width:120px">Action</th></tr></thead>
+          <tbody id="doctorListBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. TEST CATALOG MANAGEMENT TAB -->
+  <section id="catalog" class="tab hidden">
+    <div class="panel">
+      <h2>Diagnostic Test & Service Rate Catalog</h2>
+      <div class="grid three">
+        <div class="field"><label>Test Name</label><input id="catName" placeholder="Investigation / test name"></div>
+        <div class="field"><label>Room / Department</label>
+          <select id="catSpec">
+            <option value="Pathology (Room-5)">Pathology (Room-5)</option>
+            <option value="X-ray (Room-7)">X-ray (Room-7)</option>
+            <option value="Ultra (Room-6)">Ultra (Room-6)</option>
+            <option value="ECG (Room-6)">ECG (Room-6)</option>
+            <option value="Nebulization (Room-10)">Nebulization (Room-10)</option>
+            <option value="Suction (Room-12)">Suction (Room-12)</option>
+            <option value="Ward / Bed">Ward / Bed</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field"><label>Standard Rate (৳)</label><input type="number" id="catRate" min="0"></div>
+      </div>
+      <div class="actions">
+        <button onclick="saveCatalogItem()">＋ Add to Catalog</button>
+      </div>
+      <div class="table-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>#</th><th>Test Name</th><th>Department</th><th>Rate (৳)</th><th>Action</th></tr></thead>
+          <tbody id="catalogListBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PROFIT & LOSS -->
+  <section id="profit" class="tab hidden">
+    <div class="panel">
+      <h2>Profit & Loss Statement</h2>
+      <div class="inline">
+        <div class="field"><label>From Date</label><input type="date" id="profitFrom" onchange="renderProfit()"></div>
+        <div class="field"><label>To Date</label><input type="date" id="profitTo" onchange="renderProfit()"></div>
+        <button onclick="setProfitToday()" class="ghost">Today</button>
+      </div>
+      <div class="stats" style="margin-top:14px">
+        <div class="stat accent-green"><span>Patient Net Collection</span><b id="profitIncome">৳ 0.00</b><small>Total Net Cash Collected</small></div>
+        <div class="stat accent-orange"><span>Total Commission Paid</span><b id="profitCommission">৳ 0.00</b><small>Total Commissions Given</small></div>
+        <div class="stat accent-red"><span>Hospital Expenses</span><b id="profitExpense">৳ 0.00</b><small>Total Expenditure Recorded</small></div>
+        <div class="stat accent-blue"><span>Net Hospital Profit</span><b id="profitNet">৳ 0.00</b><small>Net (Income - Commission - Expense)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. SETTINGS & BACKUP -->
+  <section id="settings" class="tab hidden">
+    <div class="panel">
+      <h2>Hospital Information & Header Logo Settings</h2>
+      <div class="grid two">
+        <div class="field"><label>Hospital Name</label><input id="hName"></div>
+        <div class="field"><label>Address</label><input id="hAddress"></div>
+        <div class="field"><label>Phone Numbers</label><input id="hPhone"></div>
+        <div class="field"><label>Receipt Footer Text</label><input id="hFooter"></div>
+        
+        <div class="field"><label>Default Print Paper Size</label>
+          <select id="hPaperSize">
+            <option value="A5">A5 Portrait (Half A4)</option>
+            <option value="A6">A6 Portrait (Pocket Slip)</option>
+          </select>
+        </div>
+
+        <div class="field wide" style="background:#f8fafc;padding:10px;border-radius:8px;border:1px dashed #cbd5e1">
+          <label>Hospital Logo (Select image file)</label>
+          <div style="display:flex;align-items:center;gap:12px">
+            <input type="file" id="hLogoInput" accept="image/*" onchange="handleLogoUpload(event)">
+            <img id="hLogoPreview" style="display:none;width:44px;height:44px;object-fit:contain;border:1px solid #ddd;padding:2px;background:#fff;border-radius:4px" alt="Preview">
+            <button type="button" class="mini danger" id="hLogoRemove" onclick="removeLogo()" style="display:none">Remove Logo</button>
+          </div>
+        </div>
+      </div>
+      <div class="actions"><button onclick="saveSettings()">Save Settings</button></div>
+    </div>
+
+    <!-- Password Change Panel -->
+    <div class="panel" style="background:#f8fafc;border:1px solid #cbd5e1">
+      <h2>🔐 Security & Change Password</h2>
+      <div class="grid three">
+        <div class="field">
+          <label>Current Password</label>
+          <input type="password" id="curAppPwd" placeholder="••••••••">
+        </div>
+        <div class="field">
+          <label>New Password</label>
+          <input type="password" id="newAppPwd" placeholder="••••••••">
+        </div>
+        <div class="field">
+          <label>Confirm New Password</label>
+          <input type="password" id="confAppPwd" placeholder="••••••••">
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="orange" onclick="changeAppPassword()">Update Password</button>
+      </div>
+    </div>
+
+    <!-- Backup & Restore Notice Panel -->
+    <div class="panel" style="background:#eff6ff;border:1px solid #bfdbfe">
+      <h2 style="color:#1d4ed8">💾 Data Backup & Protection (Export / Restore Guide)</h2>
+      <p style="font-size:12px;color:#334155;line-height:1.6">
+        All data is securely saved in your local browser storage. Download a JSON backup to preserve files or restore test records.
+      </p>
+      <div class="actions" style="margin-top:10px">
+        <button onclick="exportBackup()">📥 Download JSON Backup</button>
+        <label class="ghost" style="padding:7px 13px;border-radius:7px;cursor:pointer;font-weight:700">📤 Restore JSON Backup <input type="file" accept=".json" id="backupFile" onchange="importBackup(event)" style="display:none"></label>
+        <button class="mini danger" onclick="resetToSampleData()">🔄 Reset to Clean Demo Data</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. ABOUT DEVELOPER & SYSTEM SECTION -->
+  <section id="about" class="tab hidden">
+    <div class="panel" style="max-width:850px;margin:0 auto;padding:24px 20px">
+      <div style="text-align:center;margin-bottom:18px">
+        <span style="font-size:46px">🏥</span>
+        <h2 style="font-size:20px;color:var(--navy);margin:6px 0 2px;justify-content:center">CHANDINA MEDINOVA HOSPITAL</h2>
+        <p style="margin:0;color:var(--muted);font-size:12.5px">Billing, Investigation Slip & Complete Accounts Management System</p>
+        <span class="badge" style="background:#dbeafe;color:#1e40af;margin-top:6px;display:inline-block">Portfolio Edition v2.9</span>
+      </div>
+
+      <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:18px;margin-bottom:16px;line-height:1.6">
+        <h3 style="margin:0 0 10px;color:var(--blue);font-size:15px;border-bottom:1px solid #e2e8f0;padding-bottom:6px">📌 About the System</h3>
+        <p style="margin:0 0 8px;font-size:12.5px;color:#334155">
+          This system manages diagnostic investigations, surgical billing (C-Sections, Appendicitis, Hernia), barcode slip generation, A5/A6 responsive printing, referral commissions, refunds, and real-time Profit & Loss accounting.
+        </p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:var(--card-shadow);line-height:1.7">
+        <h3 style="margin:0 0 12px;color:var(--navy);font-size:15px;border-bottom:1px solid #e2e8f0;padding-bottom:6px">👨‍💻 Developer Information</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+          <tbody>
+            <tr>
+              <td style="width:28%;padding:6px 0;font-weight:700;color:#475569">Developer:</td>
+              <td style="padding:6px 0;font-weight:bold;color:var(--navy)">Md. Kawsar Alam</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-weight:700;color:#475569">System Architecture:</td>
+              <td style="padding:6px 0">Hospital Management & Custom Accounts Solutions</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-weight:700;color:#475569">Key features:</td>
+              <td style="padding:6px 0">Offline-first local storage, barcode slip generator, referral commissions, automated revenue trend graph.</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-weight:700;color:#475569">Mobile:</td>
+              <td style="padding:6px 0;color:#087f69;font-weight:600">01890-628124</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-weight:700;color:#475569">Gmail:</td>
+              <td style="padding:6px 0;color:#1e40af;font-weight:600">lbkfashionhouse2021@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="text-align:center;font-size:11px;color:#64748b;margin-top:20px">
+        © Chandina Medinova Hospital • Portfolio Demo Project.
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= TOTALLY ISOLATED DYNAMIC PRINT CONTAINER ================= -->
+<div id="printContainer"></div>
+
+<script>
+'use strict';
+const KEY='medinova_portfolio_demo_v2';
+const AUTH_KEY='medinova_demo_pwd_v2';
+const SESSION_KEY='medinova_demo_session_active';
+
+const $=id=>document.getElementById(id);
+const date=()=>new Date().toLocaleDateString('en-CA');
+const getOffsetDate=(days)=>{
+  let d=new Date();
+  d.setDate(d.getDate()+days);
+  return d.toLocaleDateString('en-CA');
+};
+const num=x=>Math.max(0,Number(x)||0);
+const fmt=x=>'৳ '+num(x).toLocaleString('en-BD',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function showToast(msg){
+  let t=$('toast');t.textContent=msg;t.style.display='block';
+  setTimeout(()=>{t.style.display='none'},2500);
+}
+
+/* =========================================================
+   RICH REALISTIC PORTFOLIO DEMO SEED DATA
+   ========================================================= */
+const getDemoSeedData=()=>({
+  nextPatient: 88421,
+  nextReceipt: 8,
+  patients: [
+    {id:'88415',date:getOffsetDate(-5),name:'Shahanaz Begum',age:'26Y',sex:'Female',mobile:'01711-234567',ward:'Cabin-201',address:'Debidwar, Cumilla',doctor:'Dr. Farhana Akter (Gynae & Obs)',fee:200},
+    {id:'88416',date:getOffsetDate(-4),name:'Md. Rahim Ullah',age:'52Y',sex:'Male',mobile:'01822-345678',ward:'Pathology (Room-5)',address:'Chandina Bazar, Cumilla',doctor:'Dr. Md. Rafiqul Islam (MBBS, PGT)',fee:200},
+    {id:'88417',date:getOffsetDate(-3),name:'Rokeya Sultana',age:'44Y',sex:'Female',mobile:'01933-456789',ward:'Ultra (Room-6)',address:'Muradnagar, Cumilla',doctor:'Dr. Farhana Akter (Gynae & Obs)',fee:200},
+    {id:'88418',date:getOffsetDate(-2),name:'Tanvir Ahmed',age:'18Y',sex:'Male',mobile:'01644-567890',ward:'X-ray (Room-7)',address:'Barura, Cumilla',doctor:'Hospital Duty Doctor',fee:200},
+    {id:'88419',date:getOffsetDate(-1),name:'Kamrul Hasan',age:'34Y',sex:'Male',mobile:'01755-678901',ward:'Ward / Bed',address:'Chandina, Cumilla',doctor:'Dr. A. K. Azad (Surgery Specialist)',fee:200},
+    {id:'88420',date:date(),name:'Nusrat Jahan',age:'29Y',sex:'Female',mobile:'01866-789012',ward:'Cabin-204',address:'Kandirpar, Cumilla',doctor:'Dr. Farhana Akter (Gynae & Obs)',fee:200}
+  ],
+  receipts: [
+    {
+      id:'1',date:getOffsetDate(-6),type:'investigation',category:'',patientId:'88416',
+      doctor:'Dr. Md. Rafiqul Islam (MBBS, PGT)',ward:'Pathology (Room-5), X-ray (Room-7)',
+      discount:50,commission:150,other:0,notes:'Reports delivered on time',
+      tests:[
+        {name:'CBC with ESR',spec:'Pathology (Room-5)',rate:400,qty:1},
+        {name:'X-Ray Chest P/A View',spec:'X-ray (Room-7)',rate:500,qty:1},
+        {name:'Serum Creatinine',spec:'Pathology (Room-5)',rate:350,qty:1}
+      ],
+      transactions:[{type:'Payment',amount:1200,method:'Cash',time:'10:30 AM'}]
+    },
+    {
+      id:'2',date:getOffsetDate(-5),type:'indoor',category:'C-Section',patientId:'88415',
+      doctor:'Dr. Farhana Akter (Gynae & Obs)',ward:'Cabin-201',
+      discount:1000,commission:2000,other:500,notes:'Normal baby delivery via C-Section. Successful operation.',
+      tests:[
+        {name:'Cabin / Bed Rent',spec:'Ward / Bed',rate:1000,qty:3},
+        {name:'Surgeon Charge',spec:'OT',rate:12000,qty:1},
+        {name:'Anaesthesia Charge',spec:'OT',rate:3500,qty:1},
+        {name:'Hospital Medicines & Consumables',spec:'Pharmacy',rate:4000,qty:1},
+        {name:'Operation Theatre (OT) Charge',spec:'OT',rate:5000,qty:1}
+      ],
+      transactions:[
+        {type:'Payment',amount:20000,method:'Cash',time:'02:15 PM'},
+        {type:'Payment',amount:7000,method:'bKash',time:'06:40 PM'}
+      ]
+    },
+    {
+      id:'3',date:getOffsetDate(-4),type:'investigation',category:'',patientId:'88417',
+      doctor:'Dr. Farhana Akter (Gynae & Obs)',ward:'Ultra (Room-6)',
+      discount:0,commission:200,other:0,notes:'Pregnancy routine scan',
+      tests:[
+        {name:'Ultrasonography of Whole Abdomen',spec:'Ultra (Room-6)',rate:1000,qty:1},
+        {name:'Urine R/M/E',spec:'Pathology (Room-5)',rate:200,qty:1}
+      ],
+      transactions:[{type:'Payment',amount:1200,method:'Nagad',time:'11:20 AM'}]
+    },
+    {
+      id:'4',date:getOffsetDate(-3),type:'investigation',category:'',patientId:'88418',
+      doctor:'Hospital Duty Doctor',ward:'X-ray (Room-7), ECG (Room-6)',
+      discount:50,commission:100,other:0,notes:'Chest trauma evaluation',
+      tests:[
+        {name:'X-Ray Chest P/A View',spec:'X-ray (Room-7)',rate:500,qty:1},
+        {name:'ECG 12 Lead',spec:'ECG (Room-6)',rate:300,qty:1}
+      ],
+      transactions:[
+        {type:'Payment',amount:750,method:'Cash',time:'04:15 PM'},
+        {type:'Refund',amount:100,method:'Cash',time:'05:00 PM'}
+      ]
+    },
+    {
+      id:'5',date:getOffsetDate(-2),type:'indoor',category:'Appendicitis',patientId:'88419',
+      doctor:'Dr. A. K. Azad (Surgery Specialist)',ward:'Ward / Bed',
+      discount:500,commission:1500,other:200,notes:'Emergency appendectomy performed.',
+      tests:[
+        {name:'Cabin / Bed Rent',spec:'Ward / Bed',rate:800,qty:2},
+        {name:'Surgeon Charge',spec:'OT',rate:10000,qty:1},
+        {name:'Anaesthesia Charge',spec:'OT',rate:3000,qty:1},
+        {name:'Operation Theatre (OT) Charge',spec:'OT',rate:4000,qty:1}
+      ],
+      transactions:[{type:'Payment',amount:14000,method:'Cash',time:'09:30 AM'}]
+    },
+    {
+      id:'6',date:getOffsetDate(-1),type:'investigation',category:'',patientId:'88416',
+      doctor:'Dr. Md. Rafiqul Islam (MBBS, PGT)',ward:'Pathology (Room-5)',
+      discount:0,commission:250,other:0,notes:'Post-medication follow-up tests',
+      tests:[
+        {name:'Lipid Profile',spec:'Pathology (Room-5)',rate:900,qty:1},
+        {name:'Serum Creatinine',spec:'Pathology (Room-5)',rate:350,qty:1},
+        {name:'RBS (Random Blood Sugar)',spec:'Pathology (Room-5)',rate:150,qty:1}
+      ],
+      transactions:[{type:'Payment',amount:1400,method:'Cash',time:'11:15 AM'}]
+    },
+    {
+      id:'7',date:date(),type:'indoor',category:'C-Section',patientId:'88420',
+      doctor:'Dr. Farhana Akter (Gynae & Obs)',ward:'Cabin-204',
+      discount:500,commission:1800,other:400,notes:'Admission today for scheduled C-Section',
+      tests:[
+        {name:'Cabin / Bed Rent',spec:'Ward / Bed',rate:1200,qty:2},
+        {name:'Surgeon Charge',spec:'OT',rate:12000,qty:1},
+        {name:'Anaesthesia Charge',spec:'OT',rate:3500,qty:1},
+        {name:'Operation Theatre (OT) Charge',spec:'OT',rate:5000,qty:1}
+      ],
+      transactions:[{type:'Payment',amount:12000,method:'bKash',time:'12:30 PM'}]
+    }
+  ],
+  expenses: [
+    {id:'EXP-801211',date:getOffsetDate(-5),category:'Medicine & Supplies',amount:4200,vendor:'Square Pharmaceuticals',description:'Emergency surgical sutures and IV cannula'},
+    {id:'EXP-801212',date:getOffsetDate(-4),category:'Utilities & Electricity',amount:3500,vendor:'Bakhrabad Gas / Fuel',description:'Hospital generator diesel for power backup'},
+    {id:'EXP-801213',date:getOffsetDate(-2),category:'Maintenance & OT',amount:5500,vendor:'Meditech Engineering',description:'OT light servicing and autoclave inspection'},
+    {id:'EXP-801214',date:date(),category:'Medicine & Supplies',amount:2800,vendor:'Beximco Pharma',description:'Routine pathology reagents and test kits'}
+  ],
+  doctors:[
+    'Hospital Duty Doctor',
+    'Dr. Md. Rafiqul Islam (MBBS, PGT)',
+    'Dr. Farhana Akter (Gynae & Obs)',
+    'Dr. A. K. Azad (Surgery Specialist)'
+  ],
+  catalog:[
+    {name:'CBC with ESR',spec:'Pathology (Room-5)',rate:400},
+    {name:'Ultrasonography of Whole Abdomen',spec:'Ultra (Room-6)',rate:1000},
+    {name:'X-Ray Chest P/A View',spec:'X-ray (Room-7)',rate:500},
+    {name:'ECG 12 Lead',spec:'ECG (Room-6)',rate:300},
+    {name:'Serum Creatinine',spec:'Pathology (Room-5)',rate:350},
+    {name:'RBS (Random Blood Sugar)',spec:'Pathology (Room-5)',rate:150},
+    {name:'Urine R/M/E',spec:'Pathology (Room-5)',rate:200},
+    {name:'Lipid Profile',spec:'Pathology (Room-5)',rate:900},
+    {name:'Blood Grouping & Rh',spec:'Pathology (Room-5)',rate:150},
+    {name:'Nebulization Service',spec:'Nebulization (Room-10)',rate:100},
+    {name:'Suction Service',spec:'Suction (Room-12)',rate:200}
+  ],
+  settings:{
+    name:'CHANDINA MEDINOVA HOSPITAL',
+    address:'Hospital Road, Debidwar, Cumilla, Bangladesh',
+    phone:'Phone: 01700-000000, 01800-000000',
+    footer:'Chandina Medinova Hospital • Continuous Care & Investigation Excellence',
+    logo:'',
+    paperSize:'A5'
+  }
+});
+
+let db;
+try{
+  let localData = localStorage.getItem(KEY);
+  db = localData ? JSON.parse(localData) : getDemoSeedData();
+}catch(e){
+  db = getDemoSeedData();
+}
+
+if(!db || !Array.isArray(db.patients) || db.patients.length === 0){
+  db = getDemoSeedData();
+}
+
+function resetToSampleData(){
+  if(confirm('Reset all records to fresh portfolio demo data?')){
+    db = getDemoSeedData();
+    localStorage.setItem(KEY, JSON.stringify(db));
+    localStorage.setItem(AUTH_KEY, '1234');
+    sessionStorage.setItem(SESSION_KEY, '1');
+    location.reload();
+  }
+}
+
+let currentPatient=null,currentReceipt=null,lines=[],transactions=[];
+
+function changePaperSize(size){
+  db.settings.paperSize=size;
+  persist();
+  $('receiptPaperSize').value=size;
+  $('hPaperSize').value=size;
+  if(size==='A6'){
+    $('pageStyle').textContent='@page{size:A6 portrait;margin:2.5mm 3mm}';
+  }else{
+    $('pageStyle').textContent='@page{size:A5 portrait;margin:4mm 5mm}';
+  }
+}
+
+function getBarcodeSVGString(patientIdOnly){
+  const patterns={
+    '0':'nnnwwnwnn','1':'wnnwnnnnw','2':'nnwwnnnnw','3':'wnwwnnnnn','4':'nnnwwnnnw',
+    '5':'wnnwwnnnn','6':'nnwwwnnnn','7':'nnnwnnwnw','8':'wnnwnnwnn','9':'nnwwnnwnn',
+    'A':'wnnnnwnnw','B':'nnwnnwnnw','C':'wnwnnwnnn','D':'nnnnwwnnw','E':'wnnnwwnnn',
+    'F':'nnwnwwnnn','G':'nnnnnwwnw','H':'wnnnnwwnn','I':'nnwnnwwnn','J':'nnnnwwwnn',
+    'K':'wnnnnnnww','L':'nnwnnnnww','M':'wnwnnnnwn','N':'nnnnwnnww','O':'wnnnwnnwn',
+    'P':'nnwnwnnwn','Q':'nnnnnnwww','R':'wnnnnnwwn','S':'nnwnnnwwn','T':'nnnnwnwwn',
+    'U':'wwnnnnnnw','V':'nwwnnnnnw','W':'wwwnnnnnn','X':'nwnnwnnnw','Y':'wwnnwnnnn',
+    'Z':'nwwnwnnnn','-':'nwnnnnwnw','.':'wwnnnnwnn',' ':'nwwnnnwnn','$':'nwnwnwnnn',
+    '/':'nwnwnnnwn','+':'nwnnnwnwn','%':'nnnwnwnwn','*':'nwnnwnwnn'
+  };
+  let clean=String(patientIdOnly||'88415').toUpperCase().replace(/[^0-9A-Z\-\.\ \$\/\+\%]/g,'-');
+  let encoded='*'+clean+'*',x=6,bars='';
+  for(const c of encoded){
+    let pat=patterns[c]||patterns['-'];
+    [...pat].forEach((p,i)=>{
+      let w=p==='w'?2.3:1;
+      if(i%2===0)bars+=`<rect x="${x}" y="0" width="${w}" height="24"/>`;
+      x+=w;
+    });
+    x+=1.1;
+  }
+  x+=5;
+  let mid=x/2;
+  return `<svg viewBox="0 0 ${x} 34" preserveAspectRatio="xMidYMid meet"><g fill="#111827">${bars}</g><text x="${mid}" y="32" text-anchor="middle" font-size="8.5" font-family="monospace" font-weight="bold" fill="#0f172a">${esc(clean)}</text></svg>`;
+}
+
+function persist(){
+  try{localStorage.setItem(KEY,JSON.stringify(db));return true}
+  catch(e){alert('Storage error.');return false}
+}
+
+function getNextPatientId() {
+  let max = 88414;
+  (db.patients || []).forEach(p => {
+    let n = parseInt(String(p.id).replace(/\D/g, ''), 10);
+    if (!isNaN(n) && n > max) max = n;
+  });
+  return Math.max(db.nextPatient || 88421, max + 1);
+}
+
+function getNextReceiptId() {
+  let max = 0;
+  (db.receipts || []).forEach(r => {
+    let n = parseInt(String(r.id).replace(/\D/g, ''), 10);
+    if (!isNaN(n) && n > max) max = n;
+  });
+  return Math.max(db.nextReceipt || 8, max + 1);
+}
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==id));
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));
+  if(id==='dashboard')dashboard();
+  if(id==='registration')renderPatients();
+  if(id==='history')renderReceipts();
+  if(id==='billing')refreshPatientSelect();
+  if(id==='settings')renderSettings();
+  if(id==='doctors')renderDoctorList();
+  if(id==='catalog')renderCatalogList();
+  if(id==='expenses')renderExpenses();
+  if(id==='profit')renderProfit();
+}
+
+function openDueList(){
+  showTab('history');
+  let search=$('receiptSearch');
+  if(search){search.value='Due';renderReceipts()}
+}
+
+function handleGlobalSearch(term){
+  let q=term.trim();
+  if(!q)return;
+  showTab('history');
+  $('receiptSearch').value=q;
+  renderReceipts();
+}
+
+function populateDoctorDropdowns(){
+  let opts='<option value="">-- Choose Doctor --</option>'+db.doctors.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('');
+  $('pDoctorSelect').innerHTML=opts;
+  $('bDoctorSelect').innerHTML=opts;
+
+  let dlOpts=db.doctors.map(d=>`<option value="${esc(d)}"></option>`).join('');
+  if($('pDoctorDatalist')) $('pDoctorDatalist').innerHTML=dlOpts;
+  if($('bDoctorDatalist')) $('bDoctorDatalist').innerHTML=dlOpts;
+}
+
+function syncDoctorInput(type){
+  let sel=$(type+'DoctorSelect').value;
+  if(sel){ $(type+'Doctor').value=sel; }
+}
+
+function saveCustomDoctor(type){
+  let val=$(type+'Doctor').value.trim();
+  if(!val){alert('Please enter doctor name');return}
+  if(!db.doctors.includes(val)){
+    db.doctors.push(val);
+    persist();
+    populateDoctorDropdowns();
+    renderDoctorList();
+    showToast('Doctor name added to directory!');
+  }else{
+    showToast('Doctor already exists in directory');
+  }
+}
+
+function renderDoctorList(){
+  $('doctorListBody').innerHTML=db.doctors.map((d,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${esc(d)}</b></td>
+      <td><button class="mini danger" onclick="removeDoctor(${i})">Remove</button></td>
+    </tr>
+  `).join('')||'<tr><td colspan="3">No doctors registered in directory</td></tr>';
+}
+
+function addDoctor(){
+  let n=$('newDocName').value.trim();
+  if(!n){alert('Please enter doctor name');return}
+  if(!db.doctors.includes(n)){
+    db.doctors.push(n);
+    persist();
+    $('newDocName').value='';
+    populateDoctorDropdowns();
+    renderDoctorList();
+    showToast('New doctor added successfully');
+  }
+}
+
+function removeDoctor(i){
+  if(db.doctors.length<=1){alert('At least one doctor must remain in directory');return}
+  db.doctors.splice(i,1);
+  persist();
+  populateDoctorDropdowns();
+  renderDoctorList();
+}
+
+function renderCatalogList(){
+  $('catalogListBody').innerHTML=db.catalog.map((c,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${esc(c.name)}</b></td>
+      <td><span class="badge">${esc(c.spec)}</span></td>
+      <td>${fmt(c.rate)}</td>
+      <td><button class="mini danger" onclick="removeCatalog(${i})">Del</button></td>
+    </tr>
+  `).join('');
+}
+function saveCatalogItem(){
+  let name=$('catName').value.trim(),rate=num($('catRate').value),spec=$('catSpec').value;
+  if(!name||rate<=0){alert('Enter valid test name and rate');return}
+  db.catalog.push({name,spec,rate});
+  persist();
+  $('catName').value='';$('catRate').value='';
+  renderCatalogList();
+  showToast('Test added to catalog!');
+}
+function removeCatalog(i){
+  db.catalog.splice(i,1);
+  persist();
+  renderCatalogList();
+}
+
+function newPatient(){
+  currentPatient=null;
+  ['pName','pAge','pMobile','pAddress','pDoctor'].forEach(k=>$(k).value='');
+  $('pId').value=String(getNextPatientId());
+  $('pDate').value=date();
+  $('pSex').value='';
+  $('pWard').value='Ward / Bed';
+  $('pFee').value=0;
+  populateDoctorDropdowns();
+}
+function patientForm(){
+  return{
+    id:$('pId').value.trim()||String(getNextPatientId()),
+    date:$('pDate').value,
+    name:$('pName').value.trim(),
+    age:$('pAge').value.trim(),
+    sex:$('pSex').value,
+    mobile:$('pMobile').value.trim(),
+    ward:$('pWard').value,
+    address:$('pAddress').value.trim(),
+    doctor:$('pDoctor').value.trim(),
+    fee:num($('pFee').value)
+  };
+}
+function savePatient(goBilling=false,goIndoor=false){
+  let p=patientForm();
+  if(!p.id){alert('Patient ID is required');return}
+  if(!p.name){alert('Patient name is required');return}
+  let existing=currentPatient?db.patients.findIndex(x=>x.id===currentPatient):-1;
+  if(existing<0&&db.patients.some(x=>x.id===p.id)){alert('Patient ID already exists.');return}
+  
+  if(existing>=0){
+    db.patients[existing]=p;
+  }else{
+    db.patients.push(p);
+    let pNum=parseInt(String(p.id).replace(/\D/g,''),10);
+    if(!isNaN(pNum)&&pNum>=db.nextPatient){
+      db.nextPatient=pNum+1;
+    }else{
+      db.nextPatient++;
+    }
+  }
+  persist();
+  currentPatient=p.id;
+  renderPatients();
+  refreshPatientSelect();
+  dashboard();
+  showToast('Patient saved successfully');
+  if(goBilling||goIndoor){
+    if(goIndoor)newIndoorBill(); else newReceipt();
+    $('bPatient').value=p.id;
+    syncPatient();
+    showTab('billing');
+  }
+}
+function editPatient(id){
+  let p=db.patients.find(x=>x.id===id);
+  if(!p)return;
+  currentPatient=id;
+  $('pId').value=p.id;
+  $('pDate').value=p.date;
+  $('pName').value=p.name;
+  $('pAge').value=p.age||'';
+  $('pSex').value=p.sex||'';
+  $('pMobile').value=p.mobile||'';
+  $('pWard').value=p.ward||'Ward / Bed';
+  $('pAddress').value=p.address||'';
+  $('pDoctor').value=p.doctor||'';
+  $('pFee').value=p.fee||0;
+  showTab('registration');
+}
+function deletePatient(id){
+  if(!confirm('Are you sure you want to delete this patient permanently?'))return;
+  db.patients=db.patients.filter(x=>x.id!==id);
+  persist();
+  renderPatients();
+  refreshPatientSelect();
+  dashboard();
+  showToast('Patient deleted successfully');
+}
+function renderPatients(){
+  let q=($('patientSearch').value||'').toLowerCase();
+  $('patientsBody').innerHTML=db.patients.filter(p=>[p.id,p.name,p.mobile].some(x=>String(x||'').toLowerCase().includes(q))).slice().reverse().map(p=>`
+    <tr>
+      <td><b>${esc(p.id)}</b></td>
+      <td>${esc(p.name)}</td>
+      <td>${esc(p.mobile)}</td>
+      <td><span class="badge">${esc(p.ward||'Ward / Bed')}</span></td>
+      <td>${esc(p.date)}</td>
+      <td>
+        <button class="mini ghost" onclick="editPatient('${p.id}')">Edit</button>
+        <button class="mini green" onclick="startPatientBill('${p.id}',false)">Diag</button>
+        <button class="mini purple" onclick="startPatientBill('${p.id}',true)">Indoor</button>
+        <button class="mini danger" onclick="deletePatient('${p.id}')">Del</button>
+      </td>
+    </tr>
+  `).join('')||'<tr><td colspan="6">No registered patients found</td></tr>';
+}
+function startPatientBill(id,isIndoor){
+  if(isIndoor)newIndoorBill();else newReceipt();
+  $('bPatient').value=id;syncPatient();showTab('billing');
+}
+function refreshPatientSelect(){
+  let sel=$('bPatient').value;
+  $('bPatient').innerHTML='<option value="">Select registered patient...</option>'+db.patients.map(p=>`<option value="${esc(p.id)}">${esc(p.id+' — '+p.name+' — '+(p.mobile||''))}</option>`).join('');
+  if(db.patients.some(p=>p.id===sel))$('bPatient').value=sel;
+}
+function syncPatient(){
+  let p=db.patients.find(x=>x.id===$('bPatient').value);
+  if(p){
+    if(p.doctor){
+      $('bDoctor').value=p.doctor;
+      $('bDoctorSelect').value=p.doctor||'';
+    }
+    if(p.ward)$('bWard').value=p.ward;
+  }
+}
+function editSelectedPatientName(){
+  let p=db.patients.find(x=>x.id===$('bPatient').value);
+  if(!p){alert('Please select a patient first');return}
+  let n=prompt('Change patient name:',p.name);
+  if(n&&n.trim()){p.name=n.trim();persist();refreshPatientSelect();$('bPatient').value=p.id;renderPatients();dashboard()}
+}
+
+function addWardOption(val){
+  if(!val)return;
+  let current=($('bWard').value||'').trim();
+  let parts=current?current.split(',').map(s=>s.trim()).filter(Boolean):[];
+  if(!parts.includes(val)){
+    parts.push(val);
+    $('bWard').value=parts.join(', ');
+  }
+}
+function syncRoomsFromTests(){
+  let specs=[...new Set(lines.map(t=>t.spec).filter(s=>s&&s!=='Other'))];
+  if(specs.length){
+    let current=($('bWard').value||'').trim();
+    let parts=current?current.split(',').map(s=>s.trim()).filter(Boolean):[];
+    specs.forEach(s=>{if(!parts.includes(s))parts.push(s)});
+    $('bWard').value=parts.join(', ');
+    showToast('Departments synced from tests table!');
+  }
+}
+
+function newReceipt(){
+  currentReceipt=null;lines=[];transactions=[];
+  $('bType').value='investigation';
+  $('bNo').value=String(getNextReceiptId());
+  $('bDate').value=date();
+  $('bDoctor').value='';
+  $('bWard').value='';
+  $('bDiscount').value=0;
+  $('bCommission').value=0;
+  $('bOther').value=0;
+  $('bPay').value=0;
+  $('bNotes').value='';
+  $('bTxType').value='Payment';
+  $('bPayMode').value='Due';
+  adjustTxTypeUI();
+  $('indoorCategoryWrap').style.display='none';
+  $('indoorPresets').style.display='none';
+  $('diagSearchBox').style.display='flex';
+  $('billingMainTitle').textContent='Investigation & Diagnostic Bill';
+  populateDoctorDropdowns();
+  refreshPatientSelect();
+  renderLines();renderTx();calc();
+}
+
+function newIndoorBill(){
+  newReceipt();
+  $('bType').value='indoor';
+  updateBillMode();
+  showTab('billing');
+}
+
+function toggleBillType(type){
+  $('bType').value=type;
+  if(type==='investigation'){
+    if(lines.some(l=>l.name.includes('Surgeon')||l.name.includes('OT Charge'))){
+      lines=[];
+    }
+  }
+  updateBillMode();
+}
+
+function updateBillMode(){
+  let isIndoor=$('bType').value==='indoor';
+  $('indoorCategoryWrap').style.display=isIndoor?'block':'none';
+  $('indoorPresets').style.display=isIndoor?'flex':'none';
+  $('diagSearchBox').style.display=isIndoor?'none':'flex';
+  $('billingMainTitle').textContent=isIndoor?'🏥 Indoor & Surgery Admission Bill':'🔬 Investigation & Diagnostic Bill';
+  renderLines();
+  calc();
+}
+
+function applyPaymentMode(){
+  let mode=$('bPayMode').value;
+  let a=amounts();
+  if(mode==='Paid'){
+    $('bPay').value=a.due.toFixed(2);
+  }else if(mode==='Due'){
+    $('bPay').value=0;
+  }
+}
+
+function adjustTxTypeUI(){
+  let isRefund=$('bTxType').value==='Refund';
+  $('bPayLabel').textContent=isRefund?'Refund Amount (৳)':'Payment Received (৳)';
+  $('btnRecordTx').className=isRefund?'orange':'green';
+  $('btnRecordTx').textContent=isRefund?'Record Refund':'Record Payment';
+}
+
+function loadSurgeryItems(){
+  lines=[
+    {name:'Registration Fee',spec:'Office',rate:500,qty:1},
+    {name:'Cabin / Bed Rent',spec:'Ward / Bed',rate:1000,qty:4},
+    {name:'Surgeon Charge',spec:'OT',rate:12000,qty:1},
+    {name:'Anaesthesia Charge',spec:'OT',rate:3500,qty:1},
+    {name:'Surgical Assistant Charge',spec:'OT',rate:1500,qty:1},
+    {name:'Hospital Medicines & Consumables',spec:'Pharmacy',rate:4000,qty:1},
+    {name:'Operation Theatre (OT) Charge',spec:'OT',rate:5000,qty:1},
+    {name:'Duty Doctor Visit Charge',spec:'Doctor',rate:2000,qty:1},
+    {name:'Pathology Investigations',spec:'Pathology (Room-5)',rate:1500,qty:1},
+    {name:'Nebulization Service for Baby',spec:'Nebulization (Room-10)',rate:300,qty:2},
+    {name:'Suction Service for Baby',spec:'Suction (Room-12)',rate:400,qty:1},
+    {name:'Hospital Service Charge',spec:'Hospital',rate:800,qty:1}
+  ];
+  renderLines();
+  calc();
+  showToast('Surgery package items loaded!');
+}
+
+function addTestRow(t={name:'',spec:'Pathology (Room-5)',rate:0,qty:1}){
+  lines.push({...t});
+  renderLines();
+  calc();
+}
+
+function suggestTests(){
+  let q=$('testSearch').value.trim().toLowerCase();
+  $('testOptions').innerHTML=db.catalog.filter(t=>!q||t.name.toLowerCase().includes(q)).map(t=>`<option value="${esc(t.name)}"></option>`).join('');
+}
+function addCatalogTest(){
+  let q=$('testSearch').value.trim().toLowerCase();
+  if(!q)return;
+  let t=db.catalog.find(x=>x.name.toLowerCase()===q)||db.catalog.find(x=>x.name.toLowerCase().includes(q));
+  if(!t){addTestRow({name:$('testSearch').value.trim(),spec:'Pathology (Room-5)',rate:0,qty:1})}
+  else{addTestRow({...t,qty:1})}
+  $('testSearch').value='';
+  syncRoomsFromTests();
+}
+
+function renderLines(){
+  $('testsBody').innerHTML=lines.map((t,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><input value="${esc(t.name)}" onchange="setLine(${i},'name',this.value)" placeholder="Service / Investigation name"></td>
+      <td>
+        <select onchange="setLine(${i},'spec',this.value)">
+          <option value="Pathology (Room-5)" ${t.spec==='Pathology (Room-5)'?'selected':''}>Pathology (Room-5)</option>
+          <option value="X-ray (Room-7)" ${t.spec==='X-ray (Room-7)'?'selected':''}>X-ray (Room-7)</option>
+          <option value="Ultra (Room-6)" ${t.spec==='Ultra (Room-6)'?'selected':''}>Ultra (Room-6)</option>
+          <option value="ECG (Room-6)" ${t.spec==='ECG (Room-6)'?'selected':''}>ECG (Room-6)</option>
+          <option value="Nebulization (Room-10)" ${t.spec==='Nebulization (Room-10)'?'selected':''}>Nebulization (Room-10)</option>
+          <option value="Suction (Room-12)" ${t.spec==='Suction (Room-12)'?'selected':''}>Suction (Room-12)</option>
+          <option value="Ward / Bed" ${t.spec==='Ward / Bed'?'selected':''}>Ward / Bed</option>
+          <option value="OT" ${t.spec==='OT'?'selected':''}>OT</option>
+          <option value="Other" ${!['Pathology (Room-5)','X-ray (Room-7)','Ultra (Room-6)','ECG (Room-6)','Nebulization (Room-10)','Suction (Room-12)','Ward / Bed','OT'].includes(t.spec)?'selected':''}>Other</option>
+        </select>
+      </td>
+      <td><input class="narrow right" type="number" min="0" value="${num(t.rate)}" onchange="setLine(${i},'rate',this.value)"></td>
+      <td><input class="narrow right" type="number" min="1" step="1" value="${num(t.qty)}" onchange="setLine(${i},'qty',this.value)"></td>
+      <td class="right" style="font-weight:bold">${fmt(num(t.rate)*num(t.qty))}</td>
+      <td><button class="mini danger" onclick="removeLine(${i})" style="padding:2px 6px">×</button></td>
+    </tr>
+  `).join('')||'<tr><td colspan="7">No investigation or service items added</td></tr>';
+}
+function setLine(i,k,v){lines[i][k]=['rate','qty'].includes(k)?num(v):v;renderLines();calc()}
+function removeLine(i){lines.splice(i,1);renderLines();calc()}
+
+function amounts(){
+  let subtotal=lines.reduce((s,t)=>s+num(t.rate)*num(t.qty),0),
+      discount=num($('bDiscount').value),
+      commission=num($('bCommission').value),
+      other=num($('bOther').value),
+      net=Math.max(0,subtotal-discount+other),
+      paidTotal=transactions.filter(t=>t.type==='Payment').reduce((s,t)=>s+num(t.amount),0),
+      refundTotal=transactions.filter(t=>t.type==='Refund').reduce((s,t)=>s+num(t.amount),0),
+      netPaid=Math.max(0,paidTotal-refundTotal),
+      due=Math.max(0,net-netPaid),
+      hospitalNet=Math.max(0,netPaid-commission);
+  return{subtotal,discount,commission,other,net,paid:paidTotal,refund:refundTotal,netPaid,due,hospitalNet,status:due<=0?'Paid':netPaid<=0?'Due':'Partially Paid'};
+}
+
+function calc(){
+  let a=amounts();
+  $('vSubtotal').textContent=fmt(a.subtotal);
+  $('vDiscount').textContent=fmt(a.discount);
+  $('vOther').textContent=fmt(a.other);
+  $('vNet').textContent=fmt(a.net);
+  $('vPaid').textContent=fmt(a.paid);
+  $('vRefund').textContent=fmt(a.refund);
+  $('vDue').textContent=fmt(a.due);
+  $('vCommission').textContent=fmt(a.commission);
+  $('vHospitalNet').textContent=fmt(a.hospitalNet);
+  $('vStatus').textContent=a.status;
+  $('vStatus').style.color=a.due<=0?'green':'red';
+  return a;
+}
+
+function addTransaction(){
+  let v=num($('bPay').value),type=$('bTxType').value,a=amounts();
+  if(v<=0){alert('Enter valid payment amount');return}
+  if(type==='Payment'&&v>a.due+0.01){alert('Payment cannot exceed outstanding due');return}
+  if(type==='Refund'&&v>a.netPaid){alert('Refund cannot exceed net paid amount');return}
+  transactions.push({type:type,amount:v,method:$('bMethod').value,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  $('bPay').value=0;
+  $('bPayMode').value='Due';
+  renderTx();
+  calc();
+}
+function removeTx(i){transactions.splice(i,1);renderTx();calc()}
+function renderTx(){
+  $('txBody').innerHTML=transactions.map((t,i)=>`
+    <tr>
+      <td>${esc(t.time)}</td>
+      <td><span class="badge" style="background:${t.type==='Refund'?'#fef3c7':'#e1f5ee'};color:${t.type==='Refund'?'#b45309':'#076350'}">${esc(t.type)}</span></td>
+      <td>${esc(t.method)}</td>
+      <td><b>${fmt(t.amount)}</b></td>
+      <td><button class="mini danger" onclick="removeTx(${i})">×</button></td>
+    </tr>
+  `).join('')||'<tr><td colspan="5">No transactions recorded</td></tr>';
+}
+
+function receiptData(){
+  return{
+    id:$('bNo').value.trim()||String(getNextReceiptId()),
+    date:$('bDate').value,
+    type:$('bType').value,
+    category:$('bType').value==='indoor'?$('bCategory').value:'',
+    patientId:$('bPatient').value,
+    doctor:$('bDoctor').value.trim(),
+    ward:$('bWard').value.trim(),
+    discount:num($('bDiscount').value),
+    commission:num($('bCommission').value),
+    other:num($('bOther').value),
+    notes:$('bNotes').value,
+    tests:structuredClone(lines),
+    transactions:structuredClone(transactions)
+  };
+}
+
+function saveReceipt(silent=false){
+  if(!$('bPatient').value){alert('Please select a patient');return false}
+  if(!lines.length){alert('Please add at least one test or service item');return false}
+  let d=receiptData();
+  let idx=db.receipts.findIndex(r=>r.id===d.id);
+  
+  if(idx>=0){
+    db.receipts[idx]=d;
+  }else{
+    db.receipts.push(d);
+    let rNum=parseInt(String(d.id).replace(/\D/g,''),10);
+    if(!isNaN(rNum)&&rNum>=db.nextReceipt){
+      db.nextReceipt=rNum+1;
+    }else{
+      db.nextReceipt++;
+    }
+  }
+  persist();
+  currentReceipt=d.id;
+  dashboard();
+  renderReceipts();
+  if(!silent)showToast('Receipt saved successfully!');
+  return true;
+}
+
+function openReceipt(id){
+  let r=db.receipts.find(x=>x.id===id);
+  if(!r)return;
+  currentReceipt=id;
+  $('bNo').value=r.id;
+  $('bDate').value=r.date;
+  $('bType').value=r.type||'investigation';
+  $('bCategory').value=r.category||'C-Section';
+  updateBillMode();
+  refreshPatientSelect();
+  $('bPatient').value=r.patientId;
+  $('bDoctor').value=r.doctor||'';
+  $('bDoctorSelect').value=r.doctor||'';
+  $('bWard').value=r.ward||'';
+  $('bDiscount').value=r.discount||0;
+  $('bCommission').value=r.commission||0;
+  $('bOther').value=r.other||0;
+  $('bNotes').value=r.notes||'';
+  lines=structuredClone(r.tests||[]);
+  transactions=structuredClone(r.transactions||[]);
+  renderLines();renderTx();calc();
+  showTab('billing');
+}
+
+function deleteReceipt(id){
+  if(!confirm('Are you sure you want to delete this receipt?'))return;
+  db.receipts=db.receipts.filter(r=>r.id!==id);
+  persist();renderReceipts();dashboard();
+}
+
+function receiptAmounts(r){
+  let subtotal=r.tests.reduce((s,t)=>s+num(t.rate)*num(t.qty),0),
+      discount=num(r.discount),
+      commission=num(r.commission),
+      net=Math.max(0,subtotal-discount+num(r.other)),
+      paid=(r.transactions||[]).filter(t=>t.type==='Payment').reduce((s,t)=>s+num(t.amount),0),
+      refund=(r.transactions||[]).filter(t=>t.type==='Refund').reduce((s,t)=>s+num(t.amount),0),
+      netPaid=Math.max(0,paid-refund),
+      due=Math.max(0,net-netPaid),
+      hospitalNet=Math.max(0,netPaid-commission);
+  return{subtotal,discount,commission,net,paid,refund,netPaid,due,hospitalNet};
+}
+
+function renderReceipts(){
+  let q=($('receiptSearch').value||'').trim().toLowerCase();
+  $('receiptsBody').innerHTML=db.receipts.slice().reverse().filter(r=>{
+    let p=db.patients.find(x=>x.id===r.patientId)||{},a=receiptAmounts(r);
+    let st=a.due<=0?'paid':'due';
+    let pool=[
+      r.id,
+      r.patientId,
+      p.name||'',
+      p.mobile||'',
+      r.doctor||'',
+      r.ward||'',
+      r.category||'',
+      r.date,
+      st
+    ].join(' ').toLowerCase();
+    return !q || pool.includes(q);
+  }).map(r=>{
+    let p=db.patients.find(x=>x.id===r.patientId)||{},a=receiptAmounts(r);
+    return`
+      <tr>
+        <td><b>${esc(r.id)}</b></td>
+        <td><span class="badge" style="background:${r.type==='indoor'?'#f3e8ff':'#e0f2fe'};color:${r.type==='indoor'?'#7e22ce':'#0369a1'}">${r.type==='indoor'?(r.category||'Indoor'):'Diagnostic'}</span></td>
+        <td>${esc(r.date)}</td>
+        <td><b>${esc(p.name||r.patientId)}</b><br><small style="color:#64748b">${esc(p.mobile||'—')}</small></td>
+        <td><small>${esc(r.doctor||'—')}</small></td>
+        <td>${fmt(a.net)}</td>
+        <td style="color:#b91c1c;font-weight:bold">${fmt(a.commission)}</td>
+        <td style="color:#d97706;font-weight:bold">${a.refund>0?fmt(a.refund):'—'}</td>
+        <td style="color:${a.due>0?'var(--red)':'var(--green)'};font-weight:bold">${fmt(a.due)}</td>
+        <td>
+          <button class="mini ghost" onclick="openReceipt('${r.id}')">Open</button>
+          <button class="mini green" onclick="printSaved('${r.id}')">Print</button>
+          <button class="mini danger" onclick="deleteReceipt('${r.id}')">Del</button>
+        </td>
+      </tr>
+    `;
+  }).join('')||'<tr><td colspan="10">No receipts found</td></tr>';
+}
+
+function printSaved(id){let r=db.receipts.find(x=>x.id===id);if(r)renderPrintReceipt(r)}
+function printReceipt(){if(!saveReceipt(true))return;renderPrintReceipt(receiptData())}
+
+function renderPrintReceipt(r){
+  let p=db.patients.find(x=>x.id===r.patientId)||{},s=db.settings,a=receiptAmounts(r);
+  let isIndoor=r.type==='indoor';
+  let title=isIndoor?'INDOOR & SURGERY FINAL BILL':'INVESTIGATION MONEY RECEIPT';
+  let catTitle=isIndoor?('INDOOR ADMISSION • '+(r.category||'C-SECTION & SURGERY')):'DIAGNOSTIC & INVESTIGATION SERVICES';
+  let logoHTML=s.logo?`<img src="${s.logo}" class="hospital-logo" alt="Logo">`:'';
+  let paperClass=s.paperSize==='A6'?'paper-a6':'';
+
+  let rows=r.tests.map((t,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${esc(t.name)}</b></td>
+      <td>${esc(t.spec||'—')}</td>
+      <td class="right">${fmt(t.rate)}</td>
+      <td class="right">${num(t.qty)}</td>
+      <td class="right"><b>${fmt(num(t.rate)*num(t.qty))}</b></td>
+    </tr>
+  `).join('');
+
+  let sumLines=[
+    ['Subtotal Amount',fmt(a.subtotal)],
+    ['Discount',fmt(a.discount)]
+  ];
+  if(num(r.other)>0)sumLines.push(['Other Charges',fmt(r.other)]);
+  if(a.commission>0)sumLines.push(['Referral Commission',fmt(a.commission)]);
+  sumLines.push(['Net Payable',fmt(a.net)]);
+  sumLines.push(['Paid Amount',fmt(a.paid)]);
+  if(a.refund>0)sumLines.push(['Refund Amount',fmt(a.refund)]);
+  sumLines.push(['Due Balance',fmt(a.due)]);
+  sumLines.push(['Hospital Net Earning',fmt(a.hospitalNet)]);
+
+  let sumHTML=sumLines.map(([k,v])=>{
+    let isNet=k==='Hospital Net Earning';
+    let style=isNet?'style="color:#087f69;font-weight:bold"':'';
+    return `<div class="sumline"><span ${style}>${k}</span><b ${style}>${v}</b></div>`;
+  }).join('')+
+  `<div class="sumline" style="border-top:1.5px solid #334155;margin-top:2px"><span>Payment Status</span><b style="color:${a.due<=0?'green':'red'}">${a.due<=0?'PAID':'DUE'}</b></div>`;
+
+  let notesHTML=r.notes?`<div style="margin-top:4px;font-size:9px"><b>Special Notes:</b> ${esc(r.notes)}</div>`:'';
+  let testRooms=[...new Set((r.tests||[]).map(t=>t.spec).filter(Boolean))].join(', ');
+  let displayWard=r.ward||testRooms||p.ward||'Ward / Bed';
+
+  $('printContainer').innerHTML=`
+    <article class="receipt ${paperClass}">
+      <header class="rhead">
+        <div>
+          <div class="hospital-brand">
+            ${logoHTML}
+            <h2>${esc(s.name)}</h2>
+          </div>
+          <p>${esc(s.address)}</p>
+          <p>${esc(s.phone)}</p>
+          <p><b>${catTitle}</b></p>
+        </div>
+        <div class="receipt-heading">
+          <b class="title">${title}</b>
+          <p>Receipt No: <b style="font-size:11px">${esc(r.id)}</b></p>
+          <p>Date: ${esc(r.date)}</p>
+          <div class="barcode-wrap">
+            ${getBarcodeSVGString(p.id||r.patientId)}
+          </div>
+        </div>
+      </header>
+
+      <div class="rmeta">
+        <div><b>Patient ID:</b> ${esc(p.id||r.patientId)}</div>
+        <div><b>Patient Name:</b> ${esc(p.name||'—')}</div>
+        <div><b>Age/Gender:</b> ${esc(p.age||'—')} / ${esc(p.sex||'—')}</div>
+        <div><b>Room/Ward:</b> <b>${esc(displayWard)}</b></div>
+        <div><b>Mobile:</b> ${esc(p.mobile||'—')}</div>
+        <div><b>Referred Doctor:</b> ${esc(r.doctor||'Hospital Duty Doctor')}</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Particulars / Service Description</th>
+            <th>Room / Dept</th>
+            <th class="right">Rate ৳</th>
+            <th class="right">Qty</th>
+            <th class="right">Total ৳</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:5px">
+        <div style="min-width:215px">${sumHTML}</div>
+      </div>
+
+      ${notesHTML}
+      <p style="font-size:8.5px;color:#64748b;margin:3px 0">Please preserve this slip for all future inquiries.</p>
+
+      <div class="rfoot">
+        <span>Prepared By</span>
+        <span>Checked & Verified</span>
+        <span>Authorized Signature</span>
+      </div>
+
+      <p style="text-align:center;margin-top:6px;font-size:8px;color:#64748b">${esc(s.footer)}</p>
+    </article>
+  `;
+
+  window.print();
+}
+
+function printExpenseVoucher(id){
+  let exp=(db.expenses||[]).find(e=>e.id===id);
+  if(!exp)return;
+  let s=db.settings;
+
+  $('printContainer').innerHTML=`
+    <article class="expense-slip">
+      <div class="exp-head">
+        <div>
+          <h2>${esc(s.name)}</h2>
+          <p style="margin:2px 0;font-size:10px;color:#475569">${esc(s.address)} • ${esc(s.phone)}</p>
+        </div>
+        <div style="text-align:right">
+          <b style="font-size:13px;color:#b91c1c;display:block">EXPENSE DEBIT VOUCHER</b>
+          <p style="margin:2px 0;font-size:10px">Voucher No: <b>${esc(exp.id)}</b></p>
+          <p style="margin:0;font-size:10px">Date: <span>${esc(exp.date)}</span></p>
+        </div>
+      </div>
+
+      <table class="exp-table">
+        <tr>
+          <td style="width:35%"><b>Paid To / Vendor:</b></td>
+          <td><b>${esc(exp.vendor||'Office Cash')}</b></td>
+        </tr>
+        <tr>
+          <td><b>Expense Category:</b></td>
+          <td>${esc(exp.category)}</td>
+        </tr>
+        <tr>
+          <td><b>Description / Purpose:</b></td>
+          <td>${esc(exp.description)}</td>
+        </tr>
+        <tr style="font-size:14px;border-top:1.5px solid #0e2942;border-bottom:2px solid #0e2942">
+          <td><b>Total Amount:</b></td>
+          <td><b style="color:#b91c1c">${fmt(exp.amount)}</b></td>
+        </tr>
+      </table>
+
+      <div class="exp-foot">
+        <span>Receiver's Signature</span>
+        <span>Accountant</span>
+        <span>Manager / Director</span>
+      </div>
+    </article>
+  `;
+
+  window.print();
+}
+
+function renderGrowthCurve(){
+  let dates=[],dailyTotals=[];
+  for(let i=6;i>=0;i--){
+    dates.push(getOffsetDate(-i));
+  }
+  dates.forEach(dt=>{
+    let total=db.receipts.filter(r=>r.date===dt).reduce((sum,r)=>sum+receiptAmounts(r).netPaid,0);
+    dailyTotals.push(total);
+  });
+
+  let maxVal=Math.max(...dailyTotals,1000);
+  let w=650,h=150,padX=40,padY=25;
+  let pts=dailyTotals.map((val,idx)=>{
+    let x=padX+(idx*((w-padX*2)/(dates.length-1)));
+    let y=h-padY-((val/maxVal)*(h-padY*2));
+    return {x,y,val,date:dates[idx].slice(5)};
+  });
+
+  let pathD=`M ${pts[0].x} ${pts[0].y}`;
+  for(let i=1;i<pts.length;i++){
+    let cp1x=(pts[i-1].x+pts[i].x)/2;
+    pathD+=` C ${cp1x} ${pts[i-1].y}, ${cp1x} ${pts[i].y}, ${pts[i].x} ${pts[i].y}`;
+  }
+  let fillD=`${pathD} L ${pts[pts.length-1].x} ${h-padY} L ${pts[0].x} ${h-padY} Z`;
+
+  let dots=pts.map(p=>`
+    <circle cx="${p.x}" cy="${p.y}" r="4.5" fill="#155e96" stroke="#fff" stroke-width="2"/>
+    <text x="${p.x}" y="${p.y-10}" text-anchor="middle" font-size="10" font-weight="bold" fill="#0e2942">৳${p.val}</text>
+    <text x="${p.x}" y="${h-8}" text-anchor="middle" font-size="9" fill="#64748b">${p.date}</text>
+  `).join('');
+
+  $('growthChart').innerHTML=`
+    <defs>
+      <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#155e96" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#155e96" stop-opacity="0.0"/>
+      </linearGradient>
+    </defs>
+    <line x1="${padX}" y1="${h-padY}" x2="${w-padX}" y2="${h-padY}" stroke="#e2e8f0" stroke-width="1.5"/>
+    <path d="${fillD}" fill="url(#curveGrad)"/>
+    <path d="${pathD}" fill="none" stroke="#155e96" stroke-width="3" stroke-linecap="round"/>
+    ${dots}
+  `;
+}
+
+function dashboard(){
+  let today=date(),
+      todayReceipts=db.receipts.filter(r=>r.date===today),
+      totalNet=db.receipts.reduce((s,r)=>s+receiptAmounts(r).net,0),
+      totalDue=db.receipts.reduce((s,r)=>s+receiptAmounts(r).due,0),
+      todayPaid=todayReceipts.reduce((s,r)=>s+receiptAmounts(r).netPaid,0),
+      todayCommission=todayReceipts.reduce((s,r)=>s+receiptAmounts(r).commission,0),
+      todayExpense=(db.expenses||[]).filter(e=>e.date===today).reduce((s,e)=>s+num(e.amount),0),
+      todayHospitalNet=Math.max(0,todayPaid-todayCommission);
+
+  $('sPatients').textContent=db.patients.length;
+  $('sReceipts').textContent=db.receipts.length;
+  $('sNet').textContent=fmt(totalNet);
+  $('sDue').textContent=fmt(totalDue);
+  $('sToday').textContent=fmt(todayPaid);
+  $('sTodayCommission').textContent=fmt(todayCommission);
+  $('sTodayExpense').textContent=fmt(todayExpense);
+  $('sTodayHospitalNet').textContent=fmt(todayHospitalNet);
+
+  renderGrowthCurve();
+
+  let split={Cash:0,bKash:0,Nagad:0,Card:0,Bank:0};
+  todayReceipts.forEach(r=>(r.transactions||[]).forEach(t=>{
+    let mult=t.type==='Refund'?-1:1;
+    if(split[t.method]!==undefined)split[t.method]+=num(t.amount)*mult;
+  }));
+  $('collectionSplit').innerHTML=Object.entries(split).map(([k,v])=>`<div class="collection-row"><span>${esc(k)}</span><b>${fmt(v)}</b></div>`).join('')+`<div class="collection-row total"><span>Today's Net Collection</span><b>${fmt(todayPaid)}</b></div>`;
+
+  let rooms=['Pathology (Room-5)','X-ray (Room-7)','Ultra (Room-6)','ECG (Room-6)','Nebulization (Room-10)','Suction (Room-12)','Ward / Bed'];
+  $('departmentBody').innerHTML=rooms.map(rm=>{
+    let cnt=todayReceipts.filter(r=>(r.ward&&r.ward.includes(rm))||(r.tests||[]).some(t=>t.spec===rm)).length;
+    let pat=db.patients.filter(p=>p.ward===rm).length;
+    return`<tr><td><b>${esc(rm)}</b></td><td>${pat}</td><td>${cnt}</td><td><span class="badge">${cnt>0?'Active':'Idle'}</span></td></tr>`;
+  }).join('');
+}
+
+function clearExpenseForm(){$('eDate').value=date();$('eAmount').value='';$('eVendor').value='';$('eDescription').value=''}
+function saveExpense(){
+  let amt=num($('eAmount').value),desc=$('eDescription').value.trim();
+  if(!desc||amt<=0){alert('Enter description and valid amount');return}
+  if(!Array.isArray(db.expenses))db.expenses=[];
+  let id='EXP-'+String(Date.now()).slice(-6);
+  db.expenses.push({id:id,date:$('eDate').value||date(),category:$('eCategory').value,amount:amt,vendor:$('eVendor').value.trim(),description:desc});
+  persist();clearExpenseForm();renderExpenses();renderProfit();dashboard();showToast('Expense voucher saved successfully!');
+}
+
+function renderExpenses(){
+  let searchInput=$('expenseSearch');
+  let q=(searchInput ? searchInput.value : '').trim().toLowerCase();
+  $('expensesBody').innerHTML=(db.expenses||[]).slice().reverse().filter(e=>{
+    let pool=[
+      String(e.id||''),
+      String(e.category||''),
+      String(e.description||''),
+      String(e.vendor||''),
+      String(e.date||''),
+      String(e.amount||'')
+    ].join(' ').toLowerCase();
+    return !q || pool.includes(q);
+  }).map((e)=>`
+    <tr>
+      <td><b>${esc(e.id)}</b></td>
+      <td>${esc(e.date)}</td>
+      <td><span class="badge">${esc(e.category)}</span></td>
+      <td>${esc(e.description)}</td>
+      <td>${esc(e.vendor||'—')}</td>
+      <td style="color:red;font-weight:bold">${fmt(e.amount)}</td>
+      <td>
+        <button class="mini green" onclick="printExpenseVoucher('${e.id}')">🖨️ Print</button>
+        <button class="mini danger" onclick="deleteExpense('${e.id}')">Del</button>
+      </td>
+    </tr>
+  `).join('')||'<tr><td colspan="7">No expense vouchers found</td></tr>';
+}
+
+function deleteExpense(id){
+  if(!confirm('Are you sure you want to delete this expense voucher?'))return;
+  db.expenses=db.expenses.filter(x=>x.id!==id);
+  persist();renderExpenses();renderProfit();dashboard();
+}
+function setProfitToday(){$('profitFrom').value=date();$('profitTo').value=date();renderProfit()}
+function renderProfit(){
+  let f=$('profitFrom').value||'0000-01-01',t=$('profitTo').value||'9999-12-31';
+  let receipts=db.receipts.filter(r=>r.date>=f&&r.date<=t);
+  let expenses=(db.expenses||[]).filter(e=>e.date>=f&&e.date<=t);
+  let income=receipts.reduce((s,r)=>s+receiptAmounts(r).netPaid,0);
+  let commission=receipts.reduce((s,r)=>s+receiptAmounts(r).commission,0);
+  let expense=expenses.reduce((s,e)=>s+num(e.amount),0);
+  let net=income-commission-expense;
+  $('profitIncome').textContent=fmt(income);
+  $('profitCommission').textContent=fmt(commission);
+  $('profitExpense').textContent=fmt(expense);
+  $('profitNet').textContent=fmt(net);
+  $('profitNet').style.color=net>=0?'#087f69':'#b91c1c';
+}
+
+function handleLogoUpload(e){
+  let f=e.target.files?.[0];
+  if(!f)return;
+  let rd=new FileReader();
+  rd.onload=()=>{
+    db.settings.logo=rd.result;
+    persist();
+    renderSettings();
+    showToast('Hospital logo saved successfully!');
+  };
+  rd.readAsDataURL(f);
+}
+
+function removeLogo(){
+  db.settings.logo='';
+  persist();
+  renderSettings();
+  showToast('Hospital logo removed');
+}
+
+function renderSettings(){
+  let s=db.settings;
+  $('hName').value=s.name;
+  $('hAddress').value=s.address;
+  $('hPhone').value=s.phone;
+  $('hFooter').value=s.footer;
+  $('hPaperSize').value=s.paperSize||'A5';
+  $('receiptPaperSize').value=s.paperSize||'A5';
+
+  if(s.logo){
+    $('hLogoPreview').src=s.logo;
+    $('hLogoPreview').style.display='inline-block';
+    $('hLogoRemove').style.display='inline-block';
+    $('topBrandLogo').src=s.logo;
+    $('topBrandLogo').style.display='block';
+  }else{
+    $('hLogoPreview').style.display='none';
+    $('hLogoRemove').style.display='none';
+    $('topBrandLogo').style.display='none';
+  }
+  renderDoctorList();
+  renderCatalogList();
+}
+
+function saveSettings(){
+  db.settings={
+    ...db.settings,
+    name:$('hName').value.trim(),
+    address:$('hAddress').value.trim(),
+    phone:$('hPhone').value.trim(),
+    footer:$('hFooter').value.trim(),
+    paperSize:$('hPaperSize').value
+  };
+  changePaperSize(db.settings.paperSize);
+  persist();
+  showToast('Settings saved successfully!');
+}
+
+function exportBackup(){
+  let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Medinova_Portfolio_Demo_Backup_'+date()+'.json';a.click();
+}
+function importBackup(e){
+  let f=e.target.files?.[0];if(!f)return;
+  let rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      let d=JSON.parse(rd.result);
+      if(!d.patients||!d.receipts)throw new Error();
+      db=d;persist();location.reload();
+    }catch(err){alert('Invalid backup file!')}
+  };
+  rd.readAsText(f);
+}
+
+function demoQuickLogin(){
+  localStorage.setItem(AUTH_KEY,'1234');
+  sessionStorage.setItem(SESSION_KEY,'1');
+  document.body.classList.add('unlocked');
+  showToast('Welcome to Medinova Demo!');
+}
+
+function initAuth(){
+  let hasPwd=!!localStorage.getItem(AUTH_KEY);
+  let isSessionActive=sessionStorage.getItem(SESSION_KEY)==='1';
+
+  if(!hasPwd){
+    localStorage.setItem(AUTH_KEY,'1234');
+  }
+
+  if(isSessionActive){
+    document.body.classList.add('unlocked');
+  }
+
+  $('authForm').onsubmit=e=>{
+    e.preventDefault();
+    let p=$('authPassword').value;
+    let saved = localStorage.getItem(AUTH_KEY) || '1234';
+    if(p === saved || p === '1234'){
+      sessionStorage.setItem(SESSION_KEY,'1');
+      document.body.classList.add('unlocked');
+    }else{
+      $('authMessage').textContent='Incorrect PIN! Use: 1234';
+    }
+  };
+}
+
+function changeAppPassword(){
+  let cur=$('curAppPwd').value;
+  let nw=$('newAppPwd').value;
+  let conf=$('confAppPwd').value;
+  let saved=localStorage.getItem(AUTH_KEY) || '1234';
+
+  if(saved && cur!==saved){alert('Current PIN is incorrect!');return}
+  if(!nw || nw.length < 4){alert('New PIN must be at least 4 characters!');return}
+  if(nw !== conf){alert('Confirmation PIN does not match!');return}
+
+  localStorage.setItem(AUTH_KEY, nw);
+  $('curAppPwd').value='';$('newAppPwd').value='';$('confAppPwd').value='';
+  showToast('PIN successfully updated!');
+  alert('PIN updated!');
+}
+
+function lockApp(){
+  sessionStorage.removeItem(SESSION_KEY);
+  $('authPassword').value='';
+  document.body.classList.remove('unlocked');
+}
+
+/* Boot Initialization */
+changePaperSize(db.settings.paperSize||'A5');
+populateDoctorDropdowns();
+newPatient();
+newReceipt();
+renderSettings();
+dashboard();
+initAuth();
+</script>
+</body>
+</html>
+```
